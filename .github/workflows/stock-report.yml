@@ -21,6 +21,6 @@ jobs:
 
       - name: Run stock report
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.CC }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK }}
         run: python stock_report.py
