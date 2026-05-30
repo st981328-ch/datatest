@@ -84,7 +84,7 @@ def run_analysis(prompt):
         input=prompt,
         capture_output=True,
         text=True,
-        timeout=600,
+        timeout=1500,
     )
     if proc.returncode != 0:
         raise RuntimeError(f"Claude CLI error:\n{proc.stderr[:2000]}")
