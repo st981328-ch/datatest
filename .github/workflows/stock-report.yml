@@ -16,11 +16,24 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Setup Claude credentials
+        env:
+          CLAUDE_CREDENTIALS: ${{ secrets.CLAUDE_CREDENTIALS }}
+        run: |
+          mkdir -p ~/.claude
+          printf '%s' "$CLAUDE_CREDENTIALS" > ~/.claude/.credentials.json
+
       - name: Install dependencies
-        run: pip install anthropic requests
+        run: pip install requests
 
       - name: Run stock report
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.CC }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK }}
         run: python stock_report.py

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Daily Taiwan stock report: FinMind data + Claude API web_search + Slack."""
+"""Daily Taiwan stock report: FinMind data + Claude Code CLI web_search + Slack."""
 import os
 import re
+import subprocess
 import requests
 from datetime import datetime, timedelta
-import anthropic
 
 HOLDINGS = [
     {"code": "6274", "name": "台燿科技", "sector": "CCL"},
@@ -79,24 +79,16 @@ def build_context(prev_date):
 
 
 def run_analysis(prompt):
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    resp = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=16000,
-        tools=[{
-            "type": "web_search_20260209",
-            "name": "web_search",
-            "max_uses": 40,
-            "user_location": {
-                "type": "approximate",
-                "city": "Taipei",
-                "country": "TW",
-                "timezone": "Asia/Taipei",
-            },
-        }],
-        messages=[{"role": "user", "content": prompt}],
+    proc = subprocess.run(
+        ["claude", "--print", "--dangerously-skip-permissions"],
+        input=prompt,
+        capture_output=True,
+        text=True,
+        timeout=600,
     )
-    return "".join(b.text for b in resp.content if hasattr(b, "text"))
+    if proc.returncode != 0:
+        raise RuntimeError(f"Claude CLI error:\n{proc.stderr[:2000]}")
+    return proc.stdout
 
 
 def slack_send(token, channel, text, thread_ts=None):
