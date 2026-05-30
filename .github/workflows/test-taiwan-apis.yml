@@ -1,0 +1,39 @@
+name: Test Taiwan Financial APIs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-apis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test WantGoo
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -L \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+            "https://www.wantgoo.com/stock/6274")
+          echo "WantGoo: $STATUS"
+
+      - name: Test FinMind
+        run: |
+          BODY=$(curl -s \
+            "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockPrice&data_id=6274&start_date=2026-05-29&end_date=2026-05-29")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockPrice&data_id=6274&start_date=2026-05-29&end_date=2026-05-29")
+          echo "FinMind status: $STATUS"
+          echo "FinMind body: ${BODY:0:200}"
+
+      - name: Test TWSE
+        run: |
+          BODY=$(curl -s \
+            "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY?stockNo=6274")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY?stockNo=6274")
+          echo "TWSE status: $STATUS"
+          echo "TWSE body: ${BODY:0:200}"
+
+      - name: Test Fugle
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://api.fugle.tw/marketdata/v1.0/stock/intraday/quote/2330")
+          echo "Fugle: $STATUS"
