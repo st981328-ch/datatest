@@ -1,14 +1,17 @@
-name: Daily Stock Report
+name: Fetch Stock Data
 
 on:
   schedule:
-    - cron: '30 23 * * 0-4'  # 07:30 Taiwan time, Mon-Fri
+    - cron: '15 23 * * 0-4'  # 07:15 Taiwan time, Mon-Fri (before CCR at 07:30)
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  report:
+  fetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -16,29 +19,16 @@ jobs:
         with:
           python-version: '3.12'
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Claude CLI
-        run: npm install -g @anthropic-ai/claude-code
-
-      - name: Setup Claude credentials
-        env:
-          CLAUDE_CREDENTIALS: ${{ secrets.CLAUDE_CREDENTIALS }}
-        run: |
-          mkdir -p ~/.claude
-          printf '%s' "$CLAUDE_CREDENTIALS" > ~/.claude/.credentials.json
-
-      - name: Verify Claude CLI
-        run: |
-          claude --version
-          python3 -c "import json,time,os; d=json.load(open(os.path.expanduser('~/.claude/.credentials.json'))); e=d['claudeAiOauth']['expiresAt']; print(f'token OK, expires in {(e/1000-time.time())/3600:.1f}h')"
-
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run stock report
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK }}
-        run: python stock_report.py
+      - name: Fetch stock data
+        run: python fetch_data.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/stock_data.json
+          git diff --staged --quiet || git commit -m "stock data $(date -u '+%Y-%m-%d')"
+          git push
