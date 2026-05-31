@@ -71,8 +71,6 @@ def main():
         if not p:
             result["stocks"].append({
                 "code": stock["code"],
-                "name": stock["name"],
-                "sector": stock["sector"],
                 "error": "no_data"
             })
             print(f"No data for {stock['name']} on {prev_date}")
@@ -85,8 +83,6 @@ def main():
 
         result["stocks"].append({
             "code": stock["code"],
-            "name": stock["name"],
-            "sector": stock["sector"],
             "close": close,
             "spread": spread,
             "spread_pct": s(pct) + "%",
