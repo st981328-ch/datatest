@@ -1,1 +1,32 @@
-{"report_date": "", "prev_date": "", "stocks": []}
+{
+  "report_date": "2026-05-31",
+  "prev_date": "2026-05-29",
+  "stocks": [
+    {
+      "code": "6274",
+      "name": "台燿科技",
+      "sector": "CCL",
+      "close": 1690.0,
+      "spread": 150.0,
+      "spread_pct": "+9.74%",
+      "foreign": 80.4,
+      "trust": 977.0,
+      "dealer": -30.6,
+      "total": 1026.8,
+      "inst_text": "外資+80.4張，投信+977.0張，自營-30.6張，合計+1026.8張"
+    },
+    {
+      "code": "2327",
+      "name": "國巨",
+      "sector": "被動元件",
+      "close": 738.0,
+      "spread": -4.0,
+      "spread_pct": "-0.54%",
+      "foreign": -5438.0,
+      "trust": 278.1,
+      "dealer": 538.6,
+      "total": -4621.3,
+      "inst_text": "外資-5438.0張，投信+278.1張，自營+538.6張，合計-4621.3張"
+    }
+  ]
+}
