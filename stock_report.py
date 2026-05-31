@@ -87,7 +87,11 @@ def run_analysis(prompt):
         timeout=1500,
     )
     if proc.returncode != 0:
-        raise RuntimeError(f"Claude CLI error:\n{proc.stderr[:2000]}")
+        raise RuntimeError(
+            f"Claude CLI exit code: {proc.returncode}\n"
+            f"STDERR ({len(proc.stderr)}): {proc.stderr[:2000]}\n"
+            f"STDOUT ({len(proc.stdout)}): {proc.stdout[:2000]}"
+        )
     return proc.stdout
 
 
