@@ -87,6 +87,95 @@ def parse_num(s):
         return 0
 
 
+# ── Technical Indicators ──────────────────────────────────────────────────────
+
+def _ema_series(values, period):
+    """EMA series seeded with SMA of first `period` values."""
+    if len(values) < period:
+        return []
+    result = [sum(values[:period]) / period]
+    k = 2.0 / (period + 1)
+    for v in values[period:]:
+        result.append(v * k + result[-1] * (1 - k))
+    return result
+
+
+def _calc_rsi(closes, period=14):
+    if len(closes) <= period:
+        return None
+    changes = [closes[i] - closes[i - 1] for i in range(1, len(closes))]
+    gains  = [max(c, 0) for c in changes]
+    losses = [max(-c, 0) for c in changes]
+    avg_g = sum(gains[:period]) / period
+    avg_l = sum(losses[:period]) / period
+    for i in range(period, len(changes)):
+        avg_g = (avg_g * (period - 1) + gains[i]) / period
+        avg_l = (avg_l * (period - 1) + losses[i]) / period
+    if avg_l == 0:
+        return 100.0
+    return round(100 - 100 / (1 + avg_g / avg_l), 1)
+
+
+def _calc_macd(closes, fast=12, slow=26, sig_period=9):
+    if len(closes) < slow + sig_period:
+        return None, None, None
+    fast_ema = _ema_series(closes, fast)
+    slow_ema = _ema_series(closes, slow)
+    offset = slow - fast
+    macd_line = [f - s for f, s in zip(fast_ema[offset:], slow_ema)]
+    if len(macd_line) < sig_period:
+        return None, None, None
+    sig_line = _ema_series(macd_line, sig_period)
+    return (
+        round(macd_line[-1], 3),
+        round(sig_line[-1], 3),
+        round(macd_line[-1] - sig_line[-1], 3),
+    )
+
+
+def _calc_kd(highs, lows, closes, period=9):
+    if len(closes) < period:
+        return None, None
+    k, d = 50.0, 50.0
+    for i in range(period - 1, len(closes)):
+        h = max(highs[i - period + 1:i + 1])
+        l = min(lows[i - period + 1:i + 1])
+        rsv = (closes[i] - l) / (h - l) * 100 if h != l else 50.0
+        k = k * 2 / 3 + rsv * 1 / 3
+        d = d * 2 / 3 + k * 1 / 3
+    return round(k, 1), round(d, 1)
+
+
+def fetch_indicators(code, prev_date):
+    """Fetch 90 calendar days of price history and calculate RSI14/MACD/KD9."""
+    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=90)).strftime("%Y-%m-%d")
+    r = requests.get(FINMIND_URL, params={
+        "dataset": "TaiwanStockPrice", "data_id": code,
+        "start_date": start, "end_date": prev_date,
+    }, timeout=30)
+    rows = r.json().get("data", [])
+    if len(rows) < 35:
+        print(f"  Indicators {code}: insufficient data ({len(rows)} rows)")
+        return {}
+    closes = [row["close"] for row in rows]
+    highs  = [row["max"]   for row in rows]
+    lows   = [row["min"]   for row in rows]
+    rsi = _calc_rsi(closes)
+    macd, macd_sig, macd_hist = _calc_macd(closes)
+    k_val, d_val = _calc_kd(highs, lows, closes)
+    print(f"  Indicators {code}: RSI={rsi} MACD={macd}/{macd_sig}({macd_hist:+}) KD={k_val}/{d_val}")
+    return {
+        "rsi": rsi,
+        "macd": macd,
+        "macd_signal": macd_sig,
+        "macd_hist": macd_hist,
+        "k": k_val,
+        "d": d_val,
+    }
+
+
+# ── Momentum ──────────────────────────────────────────────────────────────────
+
 def build_momentum(prev_date):
     sector_map = fetch_sector_map()
     print(f"  Sector map: {len(sector_map)} TWSE stocks")
@@ -136,7 +225,8 @@ def build_momentum(prev_date):
 
     momentum = []
     for code, inst in top3:
-        p = finmind_price(code, prev_date)
+        p   = finmind_price(code, prev_date)
+        ind = fetch_indicators(code, prev_date)
         foreign_lots = round(inst["foreign"] / 1000, 1)
         trust_lots   = round(inst["trust"] / 1000, 1)
         dealer_lots  = round(inst["dealer"] / 1000, 1)
@@ -149,6 +239,7 @@ def build_momentum(prev_date):
             "dealer": dealer_lots,   "total": total_lots,
             "inst_text": inst_text,
         }
+        entry.update(ind)
         if p:
             spread = p["spread"]
             close  = p["close"]
@@ -176,6 +267,7 @@ def main():
     for stock in HOLDINGS:
         p    = finmind_price(stock["code"], prev_date)
         inst = finmind_inst(stock["code"], prev_date)
+        ind  = fetch_indicators(stock["code"], prev_date)
 
         if not p:
             result["stocks"].append({"code": stock["code"], "error": "no_data"})
@@ -187,13 +279,15 @@ def main():
         pct = round(spread / (close - spread) * 100, 2) if (close - spread) else 0
         s = lambda v: f"+{v}" if v >= 0 else str(v)
 
-        result["stocks"].append({
+        entry = {
             "code": stock["code"],
             "close": close, "spread": spread, "spread_pct": s(pct) + "%",
             "foreign": inst["foreign"], "trust": inst["trust"],
             "dealer":  inst["dealer"],  "total": inst["total"],
             "inst_text": inst["text"],
-        })
+        }
+        entry.update(ind)
+        result["stocks"].append(entry)
         print(f"  {stock['name']} {close} {s(spread)} | {inst['text']}")
 
     print(f"\n=== Momentum ({prev_date}) ===")
