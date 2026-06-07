@@ -46,8 +46,12 @@
     }
   ],
   "chips": {
-    "foreign_weekly_net": -1273100023,
+    "fg_score": 42.1,
+    "fg_rating": "fear",
+    "fg_date": "2026-06-05",
+    "fg_prev_close": 54.7,
+    "foreign_weekly_net": -507187066,
     "trust_weekly_net": 0,
-    "trading_days": 2
+    "trading_days": 5
   }
 }
