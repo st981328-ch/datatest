@@ -4,7 +4,7 @@ import os, sys, json, io, datetime, time, requests
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-HOLDINGS = [{"code": "6274", "name": "台燿"}, {"code": "2327", "name": "國巨"}]
+HOLDINGS = [{"code": "6274", "name": "台燿"}, {"code": "2327", "name": "國巨"}, {"code": "2472", "name": "立隆電"}]
 US_ETFS = ["SOXX", "QQQ"]
 WEEKLY_MA = 20
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
