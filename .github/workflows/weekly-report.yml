@@ -1,0 +1,33 @@
+name: Weekly Report Data
+
+on:
+  schedule:
+    - cron: '30 8 * * 5'  # 週五 16:30 台灣時間（08:30 UTC）
+  workflow_dispatch:
+
+jobs:
+  fetch-weekly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests yfinance
+
+      - name: Fetch weekly data
+        run: python fetch_weekly.py
+
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/weekly_data.json
+          git diff --staged --quiet || git commit -m "Weekly data $(date -u +%Y-%m-%d)"
+          git push
