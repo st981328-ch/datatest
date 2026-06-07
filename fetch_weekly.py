@@ -69,6 +69,27 @@ def get_margin_balance():
             print(f"  margin error {d}: {e}")
     return {}
 
+# ── CNN Fear & Greed ────────────────────────────────
+
+def get_fear_greed():
+    try:
+        r = requests.get(
+            "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+            headers=HEADERS, timeout=15
+        )
+        fg = r.json().get("fear_and_greed", {})
+        score = fg.get("score")
+        ts    = fg.get("timestamp", "")
+        return {
+            "fg_score":      round(score, 1) if score is not None else None,
+            "fg_rating":     fg.get("rating", ""),
+            "fg_date":       ts[:10] if ts else "",
+            "fg_prev_close": round(fg["previous_close"], 1) if fg.get("previous_close") is not None else None,
+        }
+    except Exception as e:
+        print(f"  fear_greed error: {e}")
+        return {}
+
 # ── 外資／投信週合計 ─────────────────────────────────
 
 def get_weekly_institutional(week_start, week_end):
@@ -156,6 +177,10 @@ def main():
                 "code": etf, "close": c, "ma20w": ma, "deviation_pct": dev
             })
             print(f"  {etf} {c}  乖離 {dev}%")
+
+    # CNN Fear & Greed
+    print("CNN Fear & Greed...")
+    result["chips"].update(get_fear_greed())
 
     # 融資餘額
     print("融資餘額...")
