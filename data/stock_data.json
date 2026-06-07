@@ -1,5 +1,5 @@
 {
-  "report_date": "2026-06-07",
+  "report_date": "2026-06-08",
   "prev_date": "2026-06-05",
   "stocks": [
     {
@@ -35,6 +35,23 @@
       "macd_hist": 8.784,
       "k": 73.8,
       "d": 83.1
+    },
+    {
+      "code": "2472",
+      "close": 363.5,
+      "spread": 13.5,
+      "spread_pct": "+3.86%",
+      "foreign": -7.3,
+      "trust": 0.0,
+      "dealer": -57.4,
+      "total": -64.7,
+      "inst_text": "外資-7.3張，投信+0.0張，自營-57.4張，合計-64.7張",
+      "rsi": 73.1,
+      "macd": 48.054,
+      "macd_signal": 44.086,
+      "macd_hist": 3.967,
+      "k": 72.4,
+      "d": 79.2
     }
   ],
   "top_sector": {
