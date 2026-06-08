@@ -59,6 +59,99 @@ def finmind_inst(code, date):
     }
 
 
+def finmind_inst_5d(code, prev_date):
+    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=14)).strftime("%Y-%m-%d")
+    r = requests.get(FINMIND_URL, params={
+        "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
+        "data_id": code, "start_date": start, "end_date": prev_date,
+    }, timeout=15)
+    rows = r.json().get("data", [])
+    totals = {}
+    for row in rows:
+        k = row["name"]
+        totals[k] = totals.get(k, 0) + row["buy"] - row["sell"]
+
+    def lots(k): return round(totals.get(k, 0) / 1000, 1)
+    foreign_5d = lots("Foreign_Investor")
+    trust_5d = lots("Investment_Trust")
+    dealer_5d = round(
+        (totals.get("Dealer_self", 0) + totals.get("Dealer_Hedging", 0)) / 1000, 1
+    )
+    total_5d = round(foreign_5d + trust_5d + dealer_5d, 1)
+    return {
+        "foreign_5d": foreign_5d, "trust_5d": trust_5d,
+        "dealer_5d": dealer_5d, "total_5d": total_5d,
+    }
+
+
+def fetch_margin_short(code, prev_date):
+    r = requests.get(FINMIND_URL, params={
+        "dataset": "TaiwanStockMarginPurchaseShortSale",
+        "data_id": code, "start_date": prev_date, "end_date": prev_date,
+    }, timeout=15)
+    rows = r.json().get("data", [])
+    if not rows:
+        return {}
+    row = rows[0]
+    margin_today = row.get("MarginPurchaseTodayBalance", 0)
+    margin_yest  = row.get("MarginPurchaseYesterdayBalance", 0)
+    short_today  = row.get("ShortSaleTodayBalance", 0)
+    short_yest   = row.get("ShortSaleYesterdayBalance", 0)
+
+    def pct(today, yest):
+        if not yest:
+            return None
+        return round((today - yest) / yest * 100, 2)
+
+    return {
+        "margin_balance":    margin_today,
+        "margin_change_pct": pct(margin_today, margin_yest),
+        "short_balance":     short_today,
+        "short_change_pct":  pct(short_today, short_yest),
+    }
+
+
+def fetch_market_data(prev_date):
+    result = {}
+
+    # 0050 as TAIEX proxy
+    r = requests.get(FINMIND_URL, params={
+        "dataset": "TaiwanStockPrice", "data_id": "0050",
+        "start_date": prev_date, "end_date": prev_date,
+    }, timeout=15)
+    data = r.json().get("data", [])
+    if data:
+        p = data[0]
+        spread = p["spread"]
+        close  = p["close"]
+        pct = round(spread / (close - spread) * 100, 2) if (close - spread) else 0
+        s = lambda v: f"+{v}" if v >= 0 else str(v)
+        result["taiex_proxy_change_pct"] = s(pct) + "%"
+        result["taiex_proxy_close"] = close
+
+    # 外資台指期淨口數
+    try:
+        r2 = requests.get(FINMIND_URL, params={
+            "dataset": "TaiwanFuturesInstitutionalInvestors",
+            "data_id": "TX",
+            "start_date": prev_date, "end_date": prev_date,
+        }, timeout=15)
+        rows2 = r2.json().get("data", [])
+        net = None
+        for row in rows2:
+            if "Foreign" in row.get("name", ""):
+                buy  = row.get("buy_open_interest_balance", 0) or 0
+                sell = row.get("sell_open_interest_balance", 0) or 0
+                net  = (net or 0) + buy - sell
+        if net is not None:
+            result["futures_foreign_net"] = net
+            result["futures_date"] = prev_date
+    except Exception as e:
+        print(f"  futures error: {e}")
+
+    return result
+
+
 def fetch_sector_map():
     r = requests.get(FINMIND_URL, params={"dataset": "TaiwanStockInfo"}, timeout=30)
     return {
@@ -91,7 +184,6 @@ def parse_num(s):
 # ── Technical Indicators ──────────────────────────────────────────────────────
 
 def _ema_series(values, period):
-    """EMA series seeded with SMA of first `period` values."""
     if len(values) < period:
         return []
     result = [sum(values[:period]) / period]
@@ -147,9 +239,24 @@ def _calc_kd(highs, lows, closes, period=9):
     return round(k, 1), round(d, 1)
 
 
+def _calc_ma(closes, period):
+    if len(closes) < period:
+        return None
+    return round(sum(closes[-period:]) / period, 2)
+
+
+def _calc_bollinger(closes, period=20):
+    if len(closes) < period:
+        return None, None, None
+    recent = closes[-period:]
+    mid = sum(recent) / period
+    std = (sum((x - mid) ** 2 for x in recent) / period) ** 0.5
+    return round(mid + 2 * std, 2), round(mid, 2), round(mid - 2 * std, 2)
+
+
 def fetch_indicators(code, prev_date):
-    """Fetch 90 calendar days of price history and calculate RSI14/MACD/KD9."""
-    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=90)).strftime("%Y-%m-%d")
+    """Fetch ~400 calendar days of price history and calculate all technical indicators."""
+    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=400)).strftime("%Y-%m-%d")
     r = requests.get(FINMIND_URL, params={
         "dataset": "TaiwanStockPrice", "data_id": code,
         "start_date": start, "end_date": prev_date,
@@ -158,20 +265,39 @@ def fetch_indicators(code, prev_date):
     if len(rows) < 35:
         print(f"  Indicators {code}: insufficient data ({len(rows)} rows)")
         return {}
-    closes = [row["close"] for row in rows]
-    highs  = [row["max"]   for row in rows]
-    lows   = [row["min"]   for row in rows]
+
+    closes  = [row["close"] for row in rows]
+    highs   = [row["max"]   for row in rows]
+    lows    = [row["min"]   for row in rows]
+    volumes = [row.get("Trading_Volume", 0) for row in rows]
+
     rsi = _calc_rsi(closes)
     macd, macd_sig, macd_hist = _calc_macd(closes)
     k_val, d_val = _calc_kd(highs, lows, closes)
-    print(f"  Indicators {code}: RSI={rsi} MACD={macd}/{macd_sig}({macd_hist:+}) KD={k_val}/{d_val}")
+    ma20  = _calc_ma(closes, 20)
+    ma60  = _calc_ma(closes, 60)
+    ma240 = _calc_ma(closes, 240)
+    bb_upper, bb_mid, bb_lower = _calc_bollinger(closes)
+
+    vol_ratio = None
+    if len(volumes) >= 6 and volumes[-1] and sum(volumes[-6:-1]) > 0:
+        avg_5d = sum(volumes[-6:-1]) / 5
+        vol_ratio = round(volumes[-1] / avg_5d, 2) if avg_5d else None
+
+    price_5d = [
+        {"date": rows[i]["date"], "close": closes[i]}
+        for i in range(max(0, len(rows) - 5), len(rows))
+    ]
+
+    print(f"  Indicators {code}: RSI={rsi} MACD={macd}/{macd_sig}({macd_hist:+}) KD={k_val}/{d_val} MA20={ma20} MA240={ma240} volR={vol_ratio}")
     return {
         "rsi": rsi,
-        "macd": macd,
-        "macd_signal": macd_sig,
-        "macd_hist": macd_hist,
-        "k": k_val,
-        "d": d_val,
+        "macd": macd, "macd_signal": macd_sig, "macd_hist": macd_hist,
+        "k": k_val, "d": d_val,
+        "ma20": ma20, "ma60": ma60, "ma240": ma240,
+        "bb_upper": bb_upper, "bb_mid": bb_mid, "bb_lower": bb_lower,
+        "vol_ratio": vol_ratio,
+        "price_5d": price_5d,
     }
 
 
@@ -226,8 +352,11 @@ def build_momentum(prev_date):
 
     momentum = []
     for code, inst in top3:
-        p   = finmind_price(code, prev_date)
-        ind = fetch_indicators(code, prev_date)
+        p     = finmind_price(code, prev_date)
+        ind   = fetch_indicators(code, prev_date)
+        inst5 = finmind_inst_5d(code, prev_date)
+        ms    = fetch_margin_short(code, prev_date)
+
         foreign_lots = round(inst["foreign"] / 1000, 1)
         trust_lots   = round(inst["trust"] / 1000, 1)
         dealer_lots  = round(inst["dealer"] / 1000, 1)
@@ -240,6 +369,8 @@ def build_momentum(prev_date):
             "dealer": dealer_lots,   "total": total_lots,
             "inst_text": inst_text,
         }
+        entry.update(inst5)
+        entry.update(ms)
         entry.update(ind)
         if p:
             spread = p["spread"]
@@ -259,16 +390,23 @@ def main():
     result = {
         "report_date": report_date,
         "prev_date": prev_date,
+        "market": {},
         "stocks": [],
         "top_sector": None,
         "momentum": [],
     }
 
-    print(f"=== Holdings ({prev_date}) ===")
+    print(f"=== Market Data ({prev_date}) ===")
+    result["market"] = fetch_market_data(prev_date)
+    print(f"  0050: {result['market'].get('taiex_proxy_change_pct')}  futures: {result['market'].get('futures_foreign_net')}")
+
+    print(f"\n=== Holdings ({prev_date}) ===")
     for stock in HOLDINGS:
-        p    = finmind_price(stock["code"], prev_date)
-        inst = finmind_inst(stock["code"], prev_date)
-        ind  = fetch_indicators(stock["code"], prev_date)
+        p     = finmind_price(stock["code"], prev_date)
+        inst  = finmind_inst(stock["code"], prev_date)
+        inst5 = finmind_inst_5d(stock["code"], prev_date)
+        ind   = fetch_indicators(stock["code"], prev_date)
+        ms    = fetch_margin_short(stock["code"], prev_date)
 
         if not p:
             result["stocks"].append({"code": stock["code"], "error": "no_data"})
@@ -287,6 +425,8 @@ def main():
             "dealer":  inst["dealer"],  "total": inst["total"],
             "inst_text": inst["text"],
         }
+        entry.update(inst5)
+        entry.update(ms)
         entry.update(ind)
         result["stocks"].append(entry)
         print(f"  {stock['name']} {close} {s(spread)} | {inst['text']}")
