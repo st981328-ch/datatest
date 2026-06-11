@@ -24,12 +24,20 @@ def prev_trading_date():
     return d.strftime("%Y-%m-%d"), now_tw.strftime("%Y-%m-%d")
 
 
+def _safe_json(r):
+    try:
+        return r.json()
+    except Exception:
+        print(f"  API non-JSON response ({r.status_code}): {r.text[:120]}")
+        return {}
+
+
 def finmind_price(code, date):
     r = requests.get(FINMIND_URL, params={
         "dataset": "TaiwanStockPrice", "data_id": code,
         "start_date": date, "end_date": date,
     }, timeout=15)
-    data = r.json().get("data", [])
+    data = _safe_json(r).get("data", [])
     return data[0] if data else None
 
 
@@ -38,7 +46,7 @@ def finmind_inst(code, date):
         "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
         "data_id": code, "start_date": date, "end_date": date,
     }, timeout=15)
-    rows = r.json().get("data", [])
+    rows = _safe_json(r).get("data", [])
     totals = {}
     for row in rows:
         k = row["name"]
@@ -65,7 +73,7 @@ def finmind_inst_5d(code, prev_date):
         "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
         "data_id": code, "start_date": start, "end_date": prev_date,
     }, timeout=15)
-    rows = r.json().get("data", [])
+    rows = _safe_json(r).get("data", [])
     totals = {}
     for row in rows:
         k = row["name"]
@@ -89,7 +97,7 @@ def fetch_margin_short(code, prev_date):
         "dataset": "TaiwanStockMarginPurchaseShortSale",
         "data_id": code, "start_date": prev_date, "end_date": prev_date,
     }, timeout=15)
-    rows = r.json().get("data", [])
+    rows = _safe_json(r).get("data", [])
     if not rows:
         return {}
     row = rows[0]
@@ -119,7 +127,7 @@ def fetch_market_data(prev_date):
         "dataset": "TaiwanStockPrice", "data_id": "0050",
         "start_date": prev_date, "end_date": prev_date,
     }, timeout=15)
-    data = r.json().get("data", [])
+    data = _safe_json(r).get("data", [])
     if data:
         p = data[0]
         spread = p["spread"]
@@ -136,12 +144,12 @@ def fetch_market_data(prev_date):
             "data_id": "TX",
             "start_date": prev_date, "end_date": prev_date,
         }, timeout=15)
-        rows2 = r2.json().get("data", [])
+        rows2 = _safe_json(r2).get("data", [])
         net = None
         for row in rows2:
-            if "Foreign" in row.get("name", ""):
-                buy  = row.get("buy_open_interest_balance", 0) or 0
-                sell = row.get("sell_open_interest_balance", 0) or 0
+            if "外資" in row.get("institutional_investors", ""):
+                buy  = row.get("long_open_interest_balance_volume", 0) or 0
+                sell = row.get("short_open_interest_balance_volume", 0) or 0
                 net  = (net or 0) + buy - sell
         if net is not None:
             result["futures_foreign_net"] = net
@@ -156,7 +164,7 @@ def fetch_sector_map():
     r = requests.get(FINMIND_URL, params={"dataset": "TaiwanStockInfo"}, timeout=30)
     return {
         s["stock_id"]: s["industry_category"]
-        for s in r.json().get("data", [])
+        for s in _safe_json(r).get("data", [])
         if s.get("type") == "twse" and s.get("industry_category")
     }
 
@@ -166,7 +174,7 @@ def fetch_twse_t86(date):
     r = requests.get(TWSE_T86_URL, params={
         "date": date_twse, "selectType": "ALL", "response": "json"
     }, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
-    d = r.json()
+    d = _safe_json(r)
     if d.get("stat") != "OK":
         return None, None
     fields = d.get("fields", [])
@@ -261,7 +269,7 @@ def fetch_indicators(code, prev_date):
         "dataset": "TaiwanStockPrice", "data_id": code,
         "start_date": start, "end_date": prev_date,
     }, timeout=30)
-    rows = r.json().get("data", [])
+    rows = _safe_json(r).get("data", [])
     if len(rows) < 35:
         print(f"  Indicators {code}: insufficient data ({len(rows)} rows)")
         return {}
@@ -289,7 +297,8 @@ def fetch_indicators(code, prev_date):
         for i in range(max(0, len(rows) - 5), len(rows))
     ]
 
-    print(f"  Indicators {code}: RSI={rsi} MACD={macd}/{macd_sig}({macd_hist:+}) KD={k_val}/{d_val} MA20={ma20} MA240={ma240} volR={vol_ratio}")
+    macd_hist_s = f"{macd_hist:+}" if macd_hist is not None else "N/A"
+    print(f"  Indicators {code}: RSI={rsi} MACD={macd}/{macd_sig}({macd_hist_s}) KD={k_val}/{d_val} MA20={ma20} MA240={ma240} volR={vol_ratio}")
     return {
         "rsi": rsi,
         "macd": macd, "macd_signal": macd_sig, "macd_hist": macd_hist,
