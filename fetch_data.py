@@ -119,6 +119,37 @@ def fetch_margin_short(code, prev_date):
     }
 
 
+def fetch_sbl(code, prev_date):
+    """借券賣出餘額（SBL）— 主力空方部位。回傳單位：張（千股）。"""
+    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=14)).strftime("%Y-%m-%d")
+    r = requests.get(FINMIND_URL, params={
+        "dataset": "TaiwanDailyShortSaleBalances",
+        "data_id": code, "start_date": start, "end_date": prev_date,
+    }, timeout=15)
+    rows = _safe_json(r).get("data", [])
+    if not rows:
+        return {}
+    rows.sort(key=lambda x: x["date"])
+    last = rows[-1]
+    bal_today = last.get("SBLShortSalesCurrentDayBalance", 0) or 0
+    bal_yest  = last.get("SBLShortSalesPreviousDayBalance", 0) or 0
+    quota     = last.get("SBLShortSalesQuota", 0) or 0
+    bal_5d_ago = rows[-6].get("SBLShortSalesCurrentDayBalance", 0) if len(rows) >= 6 else None
+
+    def lots(s): return round(s / 1000)
+    use_rate = round(bal_today / quota * 100, 2) if quota else None
+
+    out = {
+        "sbl_balance":    lots(bal_today),
+        "sbl_change_1d":  lots(bal_today - bal_yest),
+        "sbl_use_rate":   use_rate,
+    }
+    if bal_5d_ago is not None:
+        out["sbl_change_5d"] = lots(bal_today - bal_5d_ago)
+    print(f"  SBL {code}: {out['sbl_balance']}張 1d{out['sbl_change_1d']:+} 5d{out.get('sbl_change_5d', 'N/A')} use{use_rate}%")
+    return out
+
+
 def fetch_market_data(prev_date):
     result = {}
 
@@ -365,6 +396,7 @@ def build_momentum(prev_date):
         ind   = fetch_indicators(code, prev_date)
         inst5 = finmind_inst_5d(code, prev_date)
         ms    = fetch_margin_short(code, prev_date)
+        sbl   = fetch_sbl(code, prev_date)
 
         foreign_lots = round(inst["foreign"] / 1000, 1)
         trust_lots   = round(inst["trust"] / 1000, 1)
@@ -380,6 +412,7 @@ def build_momentum(prev_date):
         }
         entry.update(inst5)
         entry.update(ms)
+        entry.update(sbl)
         entry.update(ind)
         if p:
             spread = p["spread"]
@@ -416,6 +449,7 @@ def main():
         inst5 = finmind_inst_5d(stock["code"], prev_date)
         ind   = fetch_indicators(stock["code"], prev_date)
         ms    = fetch_margin_short(stock["code"], prev_date)
+        sbl   = fetch_sbl(stock["code"], prev_date)
 
         if not p:
             result["stocks"].append({"code": stock["code"], "error": "no_data"})
@@ -436,6 +470,7 @@ def main():
         }
         entry.update(inst5)
         entry.update(ms)
+        entry.update(sbl)
         entry.update(ind)
         result["stocks"].append(entry)
         print(f"  {stock['name']} {close} {s(spread)} | {inst['text']}")
