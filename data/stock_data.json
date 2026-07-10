@@ -181,11 +181,127 @@
           "close": 376.0
         }
       ]
+    },
+    {
+      "code": "6213",
+      "close": 385.0,
+      "spread": -8.5,
+      "spread_pct": "-2.16%",
+      "foreign": -2802.8,
+      "trust": 492.0,
+      "dealer": -33.8,
+      "total": -2344.6,
+      "inst_text": "外資-2802.8張，投信+492.0張，自營-33.8張，合計-2344.6張",
+      "foreign_5d": -8600.6,
+      "trust_5d": 7383.2,
+      "dealer_5d": 2098.6,
+      "total_5d": 881.2,
+      "margin_balance": 17517,
+      "margin_change_pct": 1.22,
+      "short_balance": 284,
+      "short_change_pct": -35.75,
+      "sbl_balance": 6636,
+      "sbl_change_1d": -864,
+      "sbl_use_rate": 103.14,
+      "sbl_change_5d": 14,
+      "rsi": 66.5,
+      "macd": 33.142,
+      "macd_signal": 27.626,
+      "macd_hist": 5.516,
+      "k": 66.9,
+      "d": 74.6,
+      "ma20": 326.7,
+      "ma60": 287.59,
+      "ma240": 160.41,
+      "bb_upper": 430.31,
+      "bb_mid": 326.7,
+      "bb_lower": 223.09,
+      "vol_ratio": 0.9,
+      "price_5d": [
+        {
+          "date": "2026-07-03",
+          "close": 394.0
+        },
+        {
+          "date": "2026-07-06",
+          "close": 396.0
+        },
+        {
+          "date": "2026-07-07",
+          "close": 379.0
+        },
+        {
+          "date": "2026-07-08",
+          "close": 393.5
+        },
+        {
+          "date": "2026-07-09",
+          "close": 385.0
+        }
+      ]
+    },
+    {
+      "code": "6526",
+      "close": 652.0,
+      "spread": -4.0,
+      "spread_pct": "-0.61%",
+      "foreign": -22.0,
+      "trust": 1.0,
+      "dealer": 2.5,
+      "total": -18.5,
+      "inst_text": "外資-22.0張，投信+1.0張，自營+2.5張，合計-18.5張",
+      "foreign_5d": 673.3,
+      "trust_5d": 360.3,
+      "dealer_5d": -215.9,
+      "total_5d": 817.7,
+      "margin_balance": 1550,
+      "margin_change_pct": -0.83,
+      "short_balance": 0,
+      "short_change_pct": null,
+      "sbl_balance": 1765,
+      "sbl_change_1d": -159,
+      "sbl_use_rate": 662.37,
+      "sbl_change_5d": -224,
+      "rsi": 46.6,
+      "macd": 1.408,
+      "macd_signal": 5.244,
+      "macd_hist": -3.836,
+      "k": 40.7,
+      "d": 49.8,
+      "ma20": 670.8,
+      "ma60": 651.63,
+      "ma240": 533.88,
+      "bb_upper": 728.72,
+      "bb_mid": 670.8,
+      "bb_lower": 612.88,
+      "vol_ratio": 0.37,
+      "price_5d": [
+        {
+          "date": "2026-07-03",
+          "close": 706.0
+        },
+        {
+          "date": "2026-07-06",
+          "close": 686.0
+        },
+        {
+          "date": "2026-07-07",
+          "close": 648.0
+        },
+        {
+          "date": "2026-07-08",
+          "close": 656.0
+        },
+        {
+          "date": "2026-07-09",
+          "close": 652.0
+        }
+      ]
     }
   ],
   "top_sector": {
     "name": "電子工業",
-    "net_buy_shares": 217042080
+    "net_buy_shares": 221232737
   },
   "momentum": [
     {
