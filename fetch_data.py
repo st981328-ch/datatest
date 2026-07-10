@@ -9,6 +9,8 @@ HOLDINGS = [
     {"code": "6274", "name": "台燿科技"},
     {"code": "2327", "name": "國巨"},
     {"code": "2472", "name": "立隆電"},
+    {"code": "6213", "name": "聯茂"},
+    {"code": "6526", "name": "達發"},
 ]
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
