@@ -1,57 +1,57 @@
 {
-  "report_date": "2026-07-03",
-  "week_start": "2026-06-29",
-  "week_end": "2026-07-03",
+  "report_date": "2026-07-10",
+  "week_start": "2026-07-06",
+  "week_end": "2026-07-10",
   "taiwan_index": {
     "code": "TAIEX",
-    "close": 46780.62,
-    "ma20w": 39108.25,
-    "deviation_pct": 19.62
+    "close": 45354.61,
+    "ma20w": 39695.69,
+    "deviation_pct": 14.26
   },
   "holdings": [
     {
       "code": "6274",
       "name": "台燿",
-      "close": 1790.0,
-      "ma20w": 1087.67,
-      "deviation_pct": 64.57
+      "close": 1570.0,
+      "ma20w": 1139.58,
+      "deviation_pct": 37.77
     },
     {
       "code": "2327",
       "name": "國巨",
-      "close": 1045.0,
-      "ma20w": 502.25,
-      "deviation_pct": 108.06
+      "close": 900.0,
+      "ma20w": 534.45,
+      "deviation_pct": 68.4
     },
     {
       "code": "2472",
       "name": "立隆電",
-      "close": 425.0,
-      "ma20w": 226.85,
-      "deviation_pct": 87.35
+      "close": 376.0,
+      "ma20w": 240.22,
+      "deviation_pct": 56.52
     }
   ],
   "us_etfs": [
     {
       "code": "SOXX",
-      "close": 566.32,
-      "ma20w": 457.72,
-      "deviation_pct": 23.73
+      "close": 581.7,
+      "ma20w": 468.86,
+      "deviation_pct": 24.07
     },
     {
       "code": "QQQ",
-      "close": 712.6,
-      "ma20w": 659.13,
-      "deviation_pct": 8.11
+      "close": 723.28,
+      "ma20w": 664.93,
+      "deviation_pct": 8.78
     }
   ],
   "chips": {
-    "fg_score": 31.9,
-    "fg_rating": "fear",
-    "fg_date": "2026-07-03",
-    "fg_prev_close": 31.4,
-    "foreign_weekly_net": -2601404,
-    "trust_weekly_net": 15033210,
+    "fg_score": 47.2,
+    "fg_rating": "neutral",
+    "fg_date": "2026-07-10",
+    "fg_prev_close": 47.3,
+    "foreign_weekly_net": -997196516,
+    "trust_weekly_net": -8739693,
     "trading_days": 4
   }
 }
