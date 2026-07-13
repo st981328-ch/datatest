@@ -23,6 +23,18 @@ def prev_trading_date():
     d = now_tw.date() - timedelta(days=1)
     while d.weekday() >= 5:
         d -= timedelta(days=1)
+    for _ in range(7):
+        date_str = d.strftime("%Y-%m-%d")
+        r = requests.get(FINMIND_URL, params={
+            "dataset": "TaiwanStockPrice", "data_id": "0050",
+            "start_date": date_str, "end_date": date_str,
+        }, timeout=15)
+        if _safe_json(r).get("data"):
+            return date_str, now_tw.strftime("%Y-%m-%d")
+        print(f"  prev_trading_date: {date_str} no data, stepping back")
+        d -= timedelta(days=1)
+        while d.weekday() >= 5:
+            d -= timedelta(days=1)
     return d.strftime("%Y-%m-%d"), now_tw.strftime("%Y-%m-%d")
 
 
