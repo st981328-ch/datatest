@@ -14,6 +14,8 @@ HOLDINGS = [
 ]
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
+TWSE_OPENAPI = "https://openapi.twse.com.tw/v1"
+TPEX_OPENAPI = "https://www.tpex.org.tw/openapi/v1"
 EXCLUDE_SECTORS = {"ETF", "ETN", "Index", "創新板股票"}
 
 
@@ -355,9 +357,127 @@ def fetch_indicators(code, prev_date):
     }
 
 
+# ── Fundamentals (TWSE OpenAPI) ───────────────────────────────────────────────
+
+def _f(v):
+    try:
+        v = str(v).replace(",", "").strip()
+        return float(v) if v else None
+    except (TypeError, ValueError):
+        return None
+
+
+def fetch_fundamentals():
+    """Valuation, profitability and revenue-growth metrics keyed by stock code,
+    covering both TWSE (上市) and TPEx (上櫃) listings. One request per dataset
+    covers every stock; the Azure runner IP reaches these government OpenAPIs that
+    the report runtime is blocked from."""
+    def get(base, path):
+        r = requests.get(f"{base}/{path}", timeout=30,
+                         headers={"User-Agent": "Mozilla/5.0"})
+        data = _safe_json(r)
+        return data if isinstance(data, list) else []
+
+    out = {}
+
+    def set_row(code, **kv):
+        if code:
+            out.setdefault(code, {}).update(kv)
+
+    # TWSE 上市
+    for row in get(TWSE_OPENAPI, "exchangeReport/BWIBBU_ALL"):
+        set_row(row.get("Code"), pe=_f(row.get("PEratio")),
+                div_yield=_f(row.get("DividendYield")), pb=_f(row.get("PBratio")))
+    for row in get(TWSE_OPENAPI, "opendata/t187ap05_L"):
+        set_row(row.get("公司代號"), rev_yoy=_f(row.get("累計營業收入-前期比較增減(%)")))
+    for row in get(TWSE_OPENAPI, "opendata/t187ap17_L"):
+        set_row(row.get("公司代號"),
+                gross_margin=_f(row.get("毛利率(%)(營業毛利)/(營業收入)")),
+                pretax_margin=_f(row.get("稅前純益率(%)(稅前純益)/(營業收入)")))
+
+    # TPEx 上櫃
+    for row in get(TPEX_OPENAPI, "tpex_mainboard_peratio_analysis"):
+        set_row(row.get("SecuritiesCompanyCode"), pe=_f(row.get("PriceEarningRatio")),
+                div_yield=_f(row.get("YieldRatio")), pb=_f(row.get("PriceBookRatio")))
+    for row in get(TPEX_OPENAPI, "mopsfin_t187ap05_O"):
+        set_row(row.get("公司代號"), rev_yoy=_f(row.get("累計營業收入-前期比較增減(%)")))
+    for row in get(TPEX_OPENAPI, "mopsfin_187ap17_O"):
+        set_row(row.get("SecuritiesCompanyCode"),
+                gross_margin=_f(row.get("毛利率")), pretax_margin=_f(row.get("稅前純益率")))
+
+    print(f"  Fundamentals: {len(out)} stocks (TWSE + TPEx)")
+    return out
+
+
+def _band(v, cuts, scores):
+    """scores[i] for the first cut v < cuts[i], else scores[-1]. len(scores)==len(cuts)+1."""
+    for c, s in zip(cuts, scores):
+        if v < c:
+            return s
+    return scores[-1]
+
+
+def _axis_scores(f):
+    """Six fundamental metrics, each 0-10 on fixed thresholds. None when the
+    source metric is missing so the aggregate can normalise over present axes."""
+    axes = {}
+
+    y = f.get("div_yield")
+    axes["yield"] = None if y is None else _band(y, [2, 4, 6], [4, 6, 8, 10])
+
+    pe = f.get("pe")
+    if pe is None or pe <= 0:
+        axes["pe"] = None
+    elif 8 <= pe <= 10:
+        axes["pe"] = 10
+    else:
+        axes["pe"] = _band(pe, [15, 20, 25], [8, 6, 4, 2])
+
+    pb = f.get("pb")
+    axes["pb"] = None if pb is None else _band(pb, [1, 2, 3, 4], [10, 8, 6, 4, 2])
+
+    gm = f.get("gross_margin")
+    axes["gross"] = None if gm is None else _band(gm, [20, 30, 40, 50], [2, 4, 6, 8, 10])
+
+    pm = f.get("pretax_margin")
+    axes["pretax"] = None if pm is None else _band(pm, [5, 10, 15, 20], [2, 4, 6, 8, 10])
+
+    rv = f.get("rev_yoy")
+    axes["rev"] = None if rv is None else _band(rv, [5, 10, 15, 20], [2, 4, 6, 8, 10])
+
+    return axes
+
+
+def score_fundamentals(f):
+    """Aggregate the six axes into a 0-60 score, normalised over present axes."""
+    axes = _axis_scores(f)
+    present = [v for v in axes.values() if v is not None]
+    n = len(present)
+    if n == 0:
+        return {"fund_axes": axes, "fund_score": None,
+                "fund_completeness": 0, "fund_eval": "insufficient"}
+    score = int(sum(present) / n * 6 + 0.5)
+    if n <= 1:
+        ev = "insufficient"
+    elif score >= 40:
+        ev = "strong"
+    else:
+        ev = "watch"
+    return {"fund_axes": axes, "fund_score": score,
+            "fund_completeness": int(n / 6 * 100 + 0.5), "fund_eval": ev}
+
+
+def merge_fundamentals(entry, code, fundamentals):
+    f = fundamentals.get(code, {})
+    for k in ("pe", "pb", "div_yield", "gross_margin", "pretax_margin", "rev_yoy"):
+        entry[k] = f.get(k)
+    entry.update(score_fundamentals(f))
+    return entry
+
+
 # ── Momentum ──────────────────────────────────────────────────────────────────
 
-def build_momentum(prev_date):
+def build_momentum(prev_date, fundamentals):
     sector_map = fetch_sector_map()
     print(f"  Sector map: {len(sector_map)} TWSE stocks")
 
@@ -428,6 +548,7 @@ def build_momentum(prev_date):
         entry.update(ms)
         entry.update(sbl)
         entry.update(ind)
+        merge_fundamentals(entry, code, fundamentals)
         if p:
             spread = p["spread"]
             close  = p["close"]
@@ -455,6 +576,9 @@ def main():
     print(f"=== Market Data ({prev_date}) ===")
     result["market"] = fetch_market_data(prev_date)
     print(f"  0050: {result['market'].get('taiex_proxy_change_pct')}  futures: {result['market'].get('futures_foreign_net')}")
+
+    print(f"\n=== Fundamentals ===")
+    fundamentals = fetch_fundamentals()
 
     print(f"\n=== Holdings ({prev_date}) ===")
     for stock in HOLDINGS:
@@ -486,11 +610,12 @@ def main():
         entry.update(ms)
         entry.update(sbl)
         entry.update(ind)
+        merge_fundamentals(entry, stock["code"], fundamentals)
         result["stocks"].append(entry)
-        print(f"  {stock['name']} {close} {s(spread)} | {inst['text']}")
+        print(f"  {stock['name']} {close} {s(spread)} | {inst['text']} | fund={entry.get('fund_score')}")
 
     print(f"\n=== Momentum ({prev_date}) ===")
-    top_sector, momentum = build_momentum(prev_date)
+    top_sector, momentum = build_momentum(prev_date, fundamentals)
     result["top_sector"] = top_sector
     result["momentum"] = momentum
 
