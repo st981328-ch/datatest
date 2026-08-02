@@ -14,8 +14,6 @@ HOLDINGS = [
 ]
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
-TWSE_OPENAPI = "https://openapi.twse.com.tw/v1"
-TPEX_OPENAPI = "https://www.tpex.org.tw/openapi/v1"
 EXCLUDE_SECTORS = {"ETF", "ETN", "Index", "創新板股票"}
 
 
@@ -357,56 +355,67 @@ def fetch_indicators(code, prev_date):
     }
 
 
-# ── Fundamentals (TWSE OpenAPI) ───────────────────────────────────────────────
+# ── Fundamentals (FinMind) ────────────────────────────────────────────────────
+# openapi.twse.com.tw serves an HTML block page to the Actions runner IP, so
+# valuation/revenue/margins come from FinMind, which the runner can reach and
+# which covers both TWSE and TPEx listings.
 
-def _f(v):
-    try:
-        v = str(v).replace(",", "").strip()
-        return float(v) if v else None
-    except (TypeError, ValueError):
+def _finmind_rows(dataset, code, start, end=None):
+    p = {"dataset": dataset, "data_id": code, "start_date": start}
+    if end:
+        p["end_date"] = end
+    r = requests.get(FINMIND_URL, params=p, timeout=20)
+    return _safe_json(r).get("data", [])
+
+
+def _finmind_per(code, prev_date):
+    start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=14)).strftime("%Y-%m-%d")
+    rows = _finmind_rows("TaiwanStockPER", code, start, prev_date)
+    if not rows:
+        return {}
+    rows.sort(key=lambda r: r["date"])
+    return rows[-1]
+
+
+def _cum_revenue_yoy(code):
+    """Year-to-date cumulative revenue vs the same span last year, in percent."""
+    start = (datetime.now() - timedelta(days=800)).strftime("%Y-%m-%d")
+    rows = _finmind_rows("TaiwanStockMonthRevenue", code, start)
+    if not rows:
         return None
+    latest = max(rows, key=lambda r: (r["revenue_year"], r["revenue_month"]))
+    y, m = latest["revenue_year"], latest["revenue_month"]
+    cur  = sum(r["revenue"] for r in rows if r["revenue_year"] == y     and r["revenue_month"] <= m)
+    prev = sum(r["revenue"] for r in rows if r["revenue_year"] == y - 1 and r["revenue_month"] <= m)
+    return round((cur - prev) / prev * 100, 2) if prev else None
 
 
-def fetch_fundamentals():
-    """Valuation, profitability and revenue-growth metrics keyed by stock code,
-    covering both TWSE (上市) and TPEx (上櫃) listings. One request per dataset
-    covers every stock; the Azure runner IP reaches these government OpenAPIs that
-    the report runtime is blocked from."""
-    def get(base, path):
-        r = requests.get(f"{base}/{path}", timeout=30,
-                         headers={"User-Agent": "Mozilla/5.0"})
-        data = _safe_json(r)
-        return data if isinstance(data, list) else []
+def _finmind_margins(code):
+    """Gross and pre-tax margin from the latest filed quarter."""
+    start = (datetime.now() - timedelta(days=400)).strftime("%Y-%m-%d")
+    rows = _finmind_rows("TaiwanStockFinancialStatements", code, start)
+    if not rows:
+        return None, None
+    latest_date = max(r["date"] for r in rows)
+    vals = {r["type"]: r["value"] for r in rows if r["date"] == latest_date}
+    rev, gp, pti = vals.get("Revenue"), vals.get("GrossProfit"), vals.get("PreTaxIncome")
+    gm = round(gp / rev * 100, 2) if rev and gp is not None else None
+    pm = round(pti / rev * 100, 2) if rev and pti is not None else None
+    return gm, pm
 
-    out = {}
 
-    def set_row(code, **kv):
-        if code:
-            out.setdefault(code, {}).update(kv)
-
-    # TWSE 上市
-    for row in get(TWSE_OPENAPI, "exchangeReport/BWIBBU_ALL"):
-        set_row(row.get("Code"), pe=_f(row.get("PEratio")),
-                div_yield=_f(row.get("DividendYield")), pb=_f(row.get("PBratio")))
-    for row in get(TWSE_OPENAPI, "opendata/t187ap05_L"):
-        set_row(row.get("公司代號"), rev_yoy=_f(row.get("累計營業收入-前期比較增減(%)")))
-    for row in get(TWSE_OPENAPI, "opendata/t187ap17_L"):
-        set_row(row.get("公司代號"),
-                gross_margin=_f(row.get("毛利率(%)(營業毛利)/(營業收入)")),
-                pretax_margin=_f(row.get("稅前純益率(%)(稅前純益)/(營業收入)")))
-
-    # TPEx 上櫃
-    for row in get(TPEX_OPENAPI, "tpex_mainboard_peratio_analysis"):
-        set_row(row.get("SecuritiesCompanyCode"), pe=_f(row.get("PriceEarningRatio")),
-                div_yield=_f(row.get("YieldRatio")), pb=_f(row.get("PriceBookRatio")))
-    for row in get(TPEX_OPENAPI, "mopsfin_t187ap05_O"):
-        set_row(row.get("公司代號"), rev_yoy=_f(row.get("累計營業收入-前期比較增減(%)")))
-    for row in get(TPEX_OPENAPI, "mopsfin_187ap17_O"):
-        set_row(row.get("SecuritiesCompanyCode"),
-                gross_margin=_f(row.get("毛利率")), pretax_margin=_f(row.get("稅前純益率")))
-
-    print(f"  Fundamentals: {len(out)} stocks (TWSE + TPEx)")
-    return out
+def stock_fundamentals(code, prev_date):
+    """All fundamental metrics for one stock, from FinMind."""
+    per = _finmind_per(code, prev_date)
+    gm, pm = _finmind_margins(code)
+    return {
+        "pe":            per.get("PER"),
+        "pb":            per.get("PBR"),
+        "div_yield":     per.get("dividend_yield"),
+        "rev_yoy":       _cum_revenue_yoy(code),
+        "gross_margin":  gm,
+        "pretax_margin": pm,
+    }
 
 
 def _band(v, cuts, scores):
@@ -467,8 +476,8 @@ def score_fundamentals(f):
             "fund_completeness": int(n / 6 * 100 + 0.5), "fund_eval": ev}
 
 
-def merge_fundamentals(entry, code, fundamentals):
-    f = fundamentals.get(code, {})
+def merge_fundamentals(entry, code, prev_date):
+    f = stock_fundamentals(code, prev_date)
     for k in ("pe", "pb", "div_yield", "gross_margin", "pretax_margin", "rev_yoy"):
         entry[k] = f.get(k)
     entry.update(score_fundamentals(f))
@@ -477,7 +486,7 @@ def merge_fundamentals(entry, code, fundamentals):
 
 # ── Momentum ──────────────────────────────────────────────────────────────────
 
-def build_momentum(prev_date, fundamentals):
+def build_momentum(prev_date):
     sector_map = fetch_sector_map()
     print(f"  Sector map: {len(sector_map)} TWSE stocks")
 
@@ -548,7 +557,7 @@ def build_momentum(prev_date, fundamentals):
         entry.update(ms)
         entry.update(sbl)
         entry.update(ind)
-        merge_fundamentals(entry, code, fundamentals)
+        merge_fundamentals(entry, code, prev_date)
         if p:
             spread = p["spread"]
             close  = p["close"]
@@ -576,9 +585,6 @@ def main():
     print(f"=== Market Data ({prev_date}) ===")
     result["market"] = fetch_market_data(prev_date)
     print(f"  0050: {result['market'].get('taiex_proxy_change_pct')}  futures: {result['market'].get('futures_foreign_net')}")
-
-    print(f"\n=== Fundamentals ===")
-    fundamentals = fetch_fundamentals()
 
     print(f"\n=== Holdings ({prev_date}) ===")
     for stock in HOLDINGS:
@@ -610,12 +616,12 @@ def main():
         entry.update(ms)
         entry.update(sbl)
         entry.update(ind)
-        merge_fundamentals(entry, stock["code"], fundamentals)
+        merge_fundamentals(entry, stock["code"], prev_date)
         result["stocks"].append(entry)
         print(f"  {stock['name']} {close} {s(spread)} | {inst['text']} | fund={entry.get('fund_score')}")
 
     print(f"\n=== Momentum ({prev_date}) ===")
-    top_sector, momentum = build_momentum(prev_date, fundamentals)
+    top_sector, momentum = build_momentum(prev_date)
     result["top_sector"] = top_sector
     result["momentum"] = momentum
 
