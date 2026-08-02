@@ -68,9 +68,9 @@
       "pe": 56.37,
       "pb": 13.76,
       "div_yield": 0.68,
-      "gross_margin": 27.83,
-      "pretax_margin": 21.76,
-      "rev_yoy": 85.17759900928935,
+      "gross_margin": 29.72,
+      "pretax_margin": 23.96,
+      "rev_yoy": 84.25,
       "fund_axes": {
         "yield": 4,
         "pe": 2,
@@ -140,23 +140,23 @@
           "close": 502.0
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
-      "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pe": 39.53,
+      "pb": 6.19,
+      "div_yield": 1.2,
+      "gross_margin": 38.1,
+      "pretax_margin": 27.05,
+      "rev_yoy": 29.35,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
-        "gross": null,
-        "pretax": null,
-        "rev": null
+        "yield": 4,
+        "pe": 2,
+        "pb": 2,
+        "gross": 6,
+        "pretax": 10,
+        "rev": 10
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient"
+      "fund_score": 34,
+      "fund_completeness": 100,
+      "fund_eval": "watch"
     },
     {
       "code": "2472",
@@ -215,23 +215,23 @@
           "close": 220.0
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
-      "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pe": 25.43,
+      "pb": 3.77,
+      "div_yield": 1.59,
+      "gross_margin": 30.01,
+      "pretax_margin": 17.68,
+      "rev_yoy": 18.18,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
-        "gross": null,
-        "pretax": null,
-        "rev": null
+        "yield": 4,
+        "pe": 2,
+        "pb": 4,
+        "gross": 6,
+        "pretax": 8,
+        "rev": 8
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient"
+      "fund_score": 32,
+      "fund_completeness": 100,
+      "fund_eval": "watch"
     },
     {
       "code": "6213",
@@ -290,23 +290,23 @@
           "close": 263.0
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
-      "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pe": 64.3,
+      "pb": 4.53,
+      "div_yield": 1.14,
+      "gross_margin": 11.42,
+      "pretax_margin": 5.29,
+      "rev_yoy": 25.62,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
-        "gross": null,
-        "pretax": null,
-        "rev": null
+        "yield": 4,
+        "pe": 2,
+        "pb": 2,
+        "gross": 2,
+        "pretax": 4,
+        "rev": 10
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient"
+      "fund_score": 24,
+      "fund_completeness": 100,
+      "fund_eval": "watch"
     },
     {
       "code": "6526",
@@ -365,23 +365,23 @@
           "close": 520.0
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
-      "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pe": 29.85,
+      "pb": 4.86,
+      "div_yield": 2.6,
+      "gross_margin": 52.73,
+      "pretax_margin": 16.41,
+      "rev_yoy": 9.3,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
-        "gross": null,
-        "pretax": null,
-        "rev": null
+        "yield": 6,
+        "pe": 2,
+        "pb": 2,
+        "gross": 10,
+        "pretax": 8,
+        "rev": 4
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient"
+      "fund_score": 32,
+      "fund_completeness": 100,
+      "fund_eval": "watch"
     }
   ],
   "top_sector": {
@@ -443,23 +443,23 @@
           "close": 30.85
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
+      "pe": 17.33,
+      "pb": 1.54,
+      "div_yield": 3.24,
       "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pretax_margin": 55.59,
+      "rev_yoy": 128.36,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
+        "yield": 6,
+        "pe": 6,
+        "pb": 8,
         "gross": null,
-        "pretax": null,
-        "rev": null
+        "pretax": 10,
+        "rev": 10
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient",
+      "fund_score": 48,
+      "fund_completeness": 83,
+      "fund_eval": "strong",
       "close": 30.85,
       "spread": 1.9,
       "spread_pct": "+6.56%"
@@ -518,23 +518,23 @@
           "close": 35.95
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
+      "pe": 17.62,
+      "pb": 1.58,
+      "div_yield": 3.06,
       "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pretax_margin": 53.46,
+      "rev_yoy": 117.55,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
+        "yield": 6,
+        "pe": 6,
+        "pb": 8,
         "gross": null,
-        "pretax": null,
-        "rev": null
+        "pretax": 10,
+        "rev": 10
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient",
+      "fund_score": 48,
+      "fund_completeness": 83,
+      "fund_eval": "strong",
       "close": 35.95,
       "spread": 2.8,
       "spread_pct": "+8.45%"
@@ -593,23 +593,23 @@
           "close": 27.6
         }
       ],
-      "pe": null,
-      "pb": null,
-      "div_yield": null,
+      "pe": 19.71,
+      "pb": 1.53,
+      "div_yield": 3.8,
       "gross_margin": null,
-      "pretax_margin": null,
-      "rev_yoy": null,
+      "pretax_margin": 44.9,
+      "rev_yoy": -1.88,
       "fund_axes": {
-        "yield": null,
-        "pe": null,
-        "pb": null,
+        "yield": 6,
+        "pe": 6,
+        "pb": 8,
         "gross": null,
-        "pretax": null,
-        "rev": null
+        "pretax": 10,
+        "rev": 2
       },
-      "fund_score": null,
-      "fund_completeness": 0,
-      "fund_eval": "insufficient",
+      "fund_score": 38,
+      "fund_completeness": 83,
+      "fund_eval": "watch",
       "close": 27.6,
       "spread": 0.6,
       "spread_pct": "+2.22%"
