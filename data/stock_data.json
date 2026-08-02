@@ -1,5 +1,5 @@
 {
-  "report_date": "2026-08-02",
+  "report_date": "2026-08-03",
   "prev_date": "2026-07-31",
   "market": {
     "taiex_proxy_change_pct": "+10.0%",
@@ -396,10 +396,10 @@
       "dealer": 1615.2,
       "total": 57936.0,
       "inst_text": "外資+55069.7張，投信+1251.1張，自營+1615.2張，合計+57936.0張",
-      "foreign_5d": 123114.3,
-      "trust_5d": 12822.2,
-      "dealer_5d": 30820.0,
-      "total_5d": 166756.5,
+      "foreign_5d": 0.0,
+      "trust_5d": 0.0,
+      "dealer_5d": 0.0,
+      "total_5d": 0.0,
       "margin_balance": 11209,
       "margin_change_pct": -18.37,
       "short_balance": 302,
