@@ -2,6 +2,7 @@
 """Fetch stock data: holdings from FinMind, momentum sector from TWSE T86."""
 import json
 import os
+import time
 import requests
 from datetime import datetime, timedelta, timezone
 
@@ -17,6 +18,21 @@ TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
 EXCLUDE_SECTORS = {"ETF", "ETN", "Index", "創新板股票"}
 
 
+def _get(url, params=None, timeout=15, headers=None, retries=3, backoff=2.0):
+    """GET with retry + backoff so a transient timeout or 5xx doesn't abort the run."""
+    for attempt in range(retries):
+        try:
+            r = requests.get(url, params=params, timeout=timeout, headers=headers)
+            if r.status_code >= 500:
+                raise requests.RequestException(f"HTTP {r.status_code}")
+            return r
+        except requests.RequestException as e:
+            if attempt == retries - 1:
+                raise
+            print(f"  retry {attempt + 1}/{retries - 1} after {e}")
+            time.sleep(backoff * (attempt + 1))
+
+
 def prev_trading_date():
     tw_tz = timezone(timedelta(hours=8))
     now_tw = datetime.now(tw_tz)
@@ -25,7 +41,7 @@ def prev_trading_date():
         d -= timedelta(days=1)
     for _ in range(7):
         date_str = d.strftime("%Y-%m-%d")
-        r = requests.get(FINMIND_URL, params={
+        r = _get(FINMIND_URL, params={
             "dataset": "TaiwanStockPrice", "data_id": "0050",
             "start_date": date_str, "end_date": date_str,
         }, timeout=15)
@@ -47,7 +63,7 @@ def _safe_json(r):
 
 
 def finmind_price(code, date):
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockPrice", "data_id": code,
         "start_date": date, "end_date": date,
     }, timeout=15)
@@ -56,7 +72,7 @@ def finmind_price(code, date):
 
 
 def finmind_inst(code, date):
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
         "data_id": code, "start_date": date, "end_date": date,
     }, timeout=15)
@@ -83,7 +99,7 @@ def finmind_inst(code, date):
 
 def finmind_inst_5d(code, prev_date):
     start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=14)).strftime("%Y-%m-%d")
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
         "data_id": code, "start_date": start, "end_date": prev_date,
     }, timeout=15)
@@ -107,7 +123,7 @@ def finmind_inst_5d(code, prev_date):
 
 
 def fetch_margin_short(code, prev_date):
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockMarginPurchaseShortSale",
         "data_id": code, "start_date": prev_date, "end_date": prev_date,
     }, timeout=15)
@@ -136,7 +152,7 @@ def fetch_margin_short(code, prev_date):
 def fetch_sbl(code, prev_date):
     """借券賣出餘額（SBL）— 主力空方部位。回傳單位：張（千股）。"""
     start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=14)).strftime("%Y-%m-%d")
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanDailyShortSaleBalances",
         "data_id": code, "start_date": start, "end_date": prev_date,
     }, timeout=15)
@@ -168,7 +184,7 @@ def fetch_market_data(prev_date):
     result = {}
 
     # 0050 as TAIEX proxy
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockPrice", "data_id": "0050",
         "start_date": prev_date, "end_date": prev_date,
     }, timeout=15)
@@ -184,7 +200,7 @@ def fetch_market_data(prev_date):
 
     # 外資台指期淨口數
     try:
-        r2 = requests.get(FINMIND_URL, params={
+        r2 = _get(FINMIND_URL, params={
             "dataset": "TaiwanFuturesInstitutionalInvestors",
             "data_id": "TX",
             "start_date": prev_date, "end_date": prev_date,
@@ -206,7 +222,7 @@ def fetch_market_data(prev_date):
 
 
 def fetch_sector_map():
-    r = requests.get(FINMIND_URL, params={"dataset": "TaiwanStockInfo"}, timeout=30)
+    r = _get(FINMIND_URL, params={"dataset": "TaiwanStockInfo"}, timeout=30)
     return {
         s["stock_id"]: s["industry_category"]
         for s in _safe_json(r).get("data", [])
@@ -216,7 +232,7 @@ def fetch_sector_map():
 
 def fetch_twse_t86(date):
     date_twse = date.replace("-", "")
-    r = requests.get(TWSE_T86_URL, params={
+    r = _get(TWSE_T86_URL, params={
         "date": date_twse, "selectType": "ALL", "response": "json"
     }, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
     d = _safe_json(r)
@@ -310,7 +326,7 @@ def _calc_bollinger(closes, period=20):
 def fetch_indicators(code, prev_date):
     """Fetch ~400 calendar days of price history and calculate all technical indicators."""
     start = (datetime.strptime(prev_date, "%Y-%m-%d") - timedelta(days=400)).strftime("%Y-%m-%d")
-    r = requests.get(FINMIND_URL, params={
+    r = _get(FINMIND_URL, params={
         "dataset": "TaiwanStockPrice", "data_id": code,
         "start_date": start, "end_date": prev_date,
     }, timeout=30)
@@ -364,7 +380,7 @@ def _finmind_rows(dataset, code, start, end=None):
     p = {"dataset": dataset, "data_id": code, "start_date": start}
     if end:
         p["end_date"] = end
-    r = requests.get(FINMIND_URL, params=p, timeout=20)
+    r = _get(FINMIND_URL, params=p, timeout=20)
     return _safe_json(r).get("data", [])
 
 
