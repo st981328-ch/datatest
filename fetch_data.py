@@ -1,18 +1,14 @@
 #!/usr/bin/env python3
-"""Fetch stock data: holdings from FinMind, momentum sector from TWSE T86."""
+"""Fetch momentum-stock data: strongest sector from TWSE T86 全市場法人, plus
+per-stock indicators / chips / fundamentals from FinMind. Holdings analysis moved
+to fubon/analyze_holdings.py (reads the real Fubon inventory), so this no longer
+computes a fixed holdings list."""
 import json
 import os
 import time
 import requests
 from datetime import datetime, timedelta, timezone
 
-HOLDINGS = [
-    {"code": "6274", "name": "台燿科技"},
-    {"code": "2327", "name": "國巨"},
-    {"code": "2472", "name": "立隆電"},
-    {"code": "6213", "name": "聯茂"},
-    {"code": "6526", "name": "達發"},
-]
 FINMIND_URL = "https://api.finmindtrade.com/api/v4/data"
 TWSE_T86_URL = "https://www.twse.com.tw/rwd/zh/fund/T86"
 EXCLUDE_SECTORS = {"ETF", "ETN", "Index", "創新板股票"}
@@ -69,32 +65,6 @@ def finmind_price(code, date):
     }, timeout=15)
     data = _safe_json(r).get("data", [])
     return data[0] if data else None
-
-
-def finmind_inst(code, date):
-    r = _get(FINMIND_URL, params={
-        "dataset": "TaiwanStockInstitutionalInvestorsBuySell",
-        "data_id": code, "start_date": date, "end_date": date,
-    }, timeout=15)
-    rows = _safe_json(r).get("data", [])
-    totals = {}
-    for row in rows:
-        k = row["name"]
-        totals[k] = totals.get(k, 0) + row["buy"] - row["sell"]
-
-    def lots(k): return round(totals.get(k, 0) / 1000, 1)
-    def s(v): return f"+{v}" if v >= 0 else str(v)
-
-    foreign = lots("Foreign_Investor")
-    trust = lots("Investment_Trust")
-    dealer = round(
-        (totals.get("Dealer_self", 0) + totals.get("Dealer_Hedging", 0)) / 1000, 1
-    )
-    total = round(foreign + trust + dealer, 1)
-    return {
-        "foreign": foreign, "trust": trust, "dealer": dealer, "total": total,
-        "text": f"外資{s(foreign)}張，投信{s(trust)}張，自營{s(dealer)}張，合計{s(total)}張",
-    }
 
 
 def finmind_inst_5d(code, prev_date):
@@ -593,7 +563,6 @@ def main():
         "report_date": report_date,
         "prev_date": prev_date,
         "market": {},
-        "stocks": [],
         "top_sector": None,
         "momentum": [],
     }
@@ -601,40 +570,6 @@ def main():
     print(f"=== Market Data ({prev_date}) ===")
     result["market"] = fetch_market_data(prev_date)
     print(f"  0050: {result['market'].get('taiex_proxy_change_pct')}  futures: {result['market'].get('futures_foreign_net')}")
-
-    print(f"\n=== Holdings ({prev_date}) ===")
-    for stock in HOLDINGS:
-        p     = finmind_price(stock["code"], prev_date)
-        inst  = finmind_inst(stock["code"], prev_date)
-        inst5 = finmind_inst_5d(stock["code"], prev_date)
-        ind   = fetch_indicators(stock["code"], prev_date)
-        ms    = fetch_margin_short(stock["code"], prev_date)
-        sbl   = fetch_sbl(stock["code"], prev_date)
-
-        if not p:
-            result["stocks"].append({"code": stock["code"], "error": "no_data"})
-            print(f"  No data for {stock['name']}")
-            continue
-
-        spread = p["spread"]
-        close  = p["close"]
-        pct = round(spread / (close - spread) * 100, 2) if (close - spread) else 0
-        s = lambda v: f"+{v}" if v >= 0 else str(v)
-
-        entry = {
-            "code": stock["code"],
-            "close": close, "spread": spread, "spread_pct": s(pct) + "%",
-            "foreign": inst["foreign"], "trust": inst["trust"],
-            "dealer":  inst["dealer"],  "total": inst["total"],
-            "inst_text": inst["text"],
-        }
-        entry.update(inst5)
-        entry.update(ms)
-        entry.update(sbl)
-        entry.update(ind)
-        merge_fundamentals(entry, stock["code"], prev_date)
-        result["stocks"].append(entry)
-        print(f"  {stock['name']} {close} {s(spread)} | {inst['text']} | fund={entry.get('fund_score')}")
 
     print(f"\n=== Momentum ({prev_date}) ===")
     top_sector, momentum = build_momentum(prev_date)
