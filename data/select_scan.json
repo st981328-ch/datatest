@@ -2,7 +2,7 @@
   "report_date": "2026-08-18",
   "prev": "2026-08-17",
   "gate": "有明確族群成團",
-  "formed_count": 9,
+  "formed_count": 8,
   "groups": [
     {
       "sector": "航運業",
@@ -47,11 +47,11 @@
     },
     {
       "sector": "光電業",
-      "net_lots": 108594,
+      "net_lots": 104956,
       "trust_lots": -37,
-      "buy_n": 39,
-      "sell_n": 18,
-      "breadth": 68,
+      "buy_n": 38,
+      "sell_n": 17,
+      "breadth": 69,
       "formed": true,
       "leaders": [
         {
@@ -79,10 +79,10 @@
           "trust_lots": 0
         },
         {
-          "code": "3714",
-          "name": "富采",
-          "total_lots": 2986,
-          "trust_lots": 0
+          "code": "2486",
+          "name": "一詮",
+          "total_lots": 2494,
+          "trust_lots": 165
         }
       ]
     },
@@ -170,11 +170,11 @@
     },
     {
       "sector": "電機機械",
-      "net_lots": 9390,
+      "net_lots": 9303,
       "trust_lots": 537,
-      "buy_n": 31,
+      "buy_n": 30,
       "sell_n": 17,
-      "breadth": 65,
+      "breadth": 64,
       "formed": true,
       "leaders": [
         {
@@ -333,47 +333,6 @@
       ]
     },
     {
-      "sector": "電子零組件業",
-      "net_lots": 3242,
-      "trust_lots": 33,
-      "buy_n": 18,
-      "sell_n": 9,
-      "breadth": 67,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2392",
-          "name": "正崴",
-          "total_lots": 5035,
-          "trust_lots": 0
-        },
-        {
-          "code": "3376",
-          "name": "新日興",
-          "total_lots": 789,
-          "trust_lots": 0
-        },
-        {
-          "code": "6213",
-          "name": "聯茂",
-          "total_lots": 654,
-          "trust_lots": -1
-        },
-        {
-          "code": "6141",
-          "name": "柏承",
-          "total_lots": 533,
-          "trust_lots": 0
-        },
-        {
-          "code": "6191",
-          "name": "精成科",
-          "total_lots": 510,
-          "trust_lots": 195
-        }
-      ]
-    },
-    {
       "sector": "橡膠工業",
       "net_lots": 3043,
       "trust_lots": 575,
@@ -415,12 +374,53 @@
       ]
     },
     {
+      "sector": "電子零組件業",
+      "net_lots": 2338,
+      "trust_lots": -9,
+      "buy_n": 11,
+      "sell_n": 8,
+      "breadth": 58,
+      "formed": false,
+      "leaders": [
+        {
+          "code": "2392",
+          "name": "正崴",
+          "total_lots": 5035,
+          "trust_lots": 0
+        },
+        {
+          "code": "3715",
+          "name": "定穎投控",
+          "total_lots": 711,
+          "trust_lots": 0
+        },
+        {
+          "code": "2368",
+          "name": "金像電",
+          "total_lots": 194,
+          "trust_lots": -245
+        },
+        {
+          "code": "6449",
+          "name": "鈺邦",
+          "total_lots": 89,
+          "trust_lots": 0
+        },
+        {
+          "code": "4912",
+          "name": "聯德控股-KY",
+          "total_lots": 61,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
       "sector": "化學工業",
-      "net_lots": 2245,
-      "trust_lots": -295,
-      "buy_n": 10,
-      "sell_n": 15,
-      "breadth": 40,
+      "net_lots": 1680,
+      "trust_lots": -150,
+      "buy_n": 8,
+      "sell_n": 13,
+      "breadth": 38,
       "formed": false,
       "leaders": [
         {
@@ -448,9 +448,9 @@
           "trust_lots": 0
         },
         {
-          "code": "1723",
-          "name": "中碳",
-          "total_lots": 661,
+          "code": "1708",
+          "name": "東鹼",
+          "total_lots": 220,
           "trust_lots": 0
         }
       ]
@@ -870,7 +870,7 @@
     {
       "code": "3714",
       "name": "富采",
-      "sector": "光電業",
+      "sector": "電子工業",
       "total_lots": 2986,
       "trust_lots": 0,
       "foreign_lots": 2921
@@ -910,7 +910,7 @@
     {
       "code": "3005",
       "name": "神基",
-      "sector": "電子工業",
+      "sector": "電腦及週邊設備業",
       "total_lots": 2424,
       "trust_lots": -17,
       "foreign_lots": 1790
