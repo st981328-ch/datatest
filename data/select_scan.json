@@ -1,8 +1,8 @@
 {
-  "report_date": "2026-10-23",
+  "report_date": "2026-10-26",
   "prev": "2026-10-22",
   "gate": "有明確族群成團",
-  "formed_count": 9,
+  "formed_count": 7,
   "groups": [
     {
       "sector": "金融保險",
@@ -210,47 +210,6 @@
       ]
     },
     {
-      "sector": "電腦及週邊設備業",
-      "net_lots": 11641,
-      "trust_lots": -892,
-      "buy_n": 5,
-      "sell_n": 4,
-      "breadth": 56,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2353",
-          "name": "宏碁",
-          "total_lots": 9218,
-          "trust_lots": -826
-        },
-        {
-          "code": "2352",
-          "name": "佳世達",
-          "total_lots": 2641,
-          "trust_lots": 0
-        },
-        {
-          "code": "2395",
-          "name": "研華",
-          "total_lots": 172,
-          "trust_lots": 12
-        },
-        {
-          "code": "5258",
-          "name": "虹堡",
-          "total_lots": 8,
-          "trust_lots": 0
-        },
-        {
-          "code": "2424",
-          "name": "隴華",
-          "total_lots": 2,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
       "sector": "電機機械",
       "net_lots": 11146,
       "trust_lots": 465,
@@ -293,12 +252,12 @@
     },
     {
       "sector": "通信網路業",
-      "net_lots": 10321,
-      "trust_lots": 71,
-      "buy_n": 19,
-      "sell_n": 15,
-      "breadth": 56,
-      "formed": true,
+      "net_lots": 10391,
+      "trust_lots": 429,
+      "buy_n": 15,
+      "sell_n": 14,
+      "breadth": 52,
+      "formed": false,
       "leaders": [
         {
           "code": "2412",
@@ -313,12 +272,6 @@
           "trust_lots": -1297
         },
         {
-          "code": "4904",
-          "name": "遠傳",
-          "total_lots": 1917,
-          "trust_lots": -223
-        },
-        {
           "code": "4906",
           "name": "正文",
           "total_lots": 1091,
@@ -329,6 +282,12 @@
           "name": "明泰",
           "total_lots": 990,
           "trust_lots": 111
+        },
+        {
+          "code": "2332",
+          "name": "友訊",
+          "total_lots": 653,
+          "trust_lots": 0
         }
       ]
     },
@@ -415,6 +374,47 @@
       ]
     },
     {
+      "sector": "資訊服務業",
+      "net_lots": 4767,
+      "trust_lots": -4,
+      "buy_n": 10,
+      "sell_n": 0,
+      "breadth": 100,
+      "formed": true,
+      "leaders": [
+        {
+          "code": "2468",
+          "name": "華經",
+          "total_lots": 2010,
+          "trust_lots": 0
+        },
+        {
+          "code": "6214",
+          "name": "精誠",
+          "total_lots": 790,
+          "trust_lots": -4
+        },
+        {
+          "code": "6112",
+          "name": "邁達特",
+          "total_lots": 775,
+          "trust_lots": 0
+        },
+        {
+          "code": "3029",
+          "name": "零壹",
+          "total_lots": 610,
+          "trust_lots": 0
+        },
+        {
+          "code": "2427",
+          "name": "三商電",
+          "total_lots": 315,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
       "sector": "油電燃氣業",
       "net_lots": 4673,
       "trust_lots": -8119,
@@ -456,42 +456,42 @@
       ]
     },
     {
-      "sector": "資訊服務業",
-      "net_lots": 4650,
-      "trust_lots": -4,
-      "buy_n": 9,
-      "sell_n": 1,
-      "breadth": 90,
+      "sector": "食品工業",
+      "net_lots": 4374,
+      "trust_lots": -1775,
+      "buy_n": 15,
+      "sell_n": 7,
+      "breadth": 68,
       "formed": true,
       "leaders": [
         {
-          "code": "2468",
-          "name": "華經",
-          "total_lots": 2010,
+          "code": "1216",
+          "name": "統一",
+          "total_lots": 3833,
+          "trust_lots": -1776
+        },
+        {
+          "code": "1210",
+          "name": "大成",
+          "total_lots": 366,
           "trust_lots": 0
         },
         {
-          "code": "6214",
-          "name": "精誠",
-          "total_lots": 790,
-          "trust_lots": -4
+          "code": "1229",
+          "name": "聯華",
+          "total_lots": 195,
+          "trust_lots": 1
         },
         {
-          "code": "6112",
-          "name": "邁達特",
-          "total_lots": 775,
+          "code": "1201",
+          "name": "味全",
+          "total_lots": 175,
           "trust_lots": 0
         },
         {
-          "code": "3029",
-          "name": "零壹",
-          "total_lots": 610,
-          "trust_lots": 0
-        },
-        {
-          "code": "2427",
-          "name": "三商電",
-          "total_lots": 315,
+          "code": "7780",
+          "name": "大研生醫",
+          "total_lots": 148,
           "trust_lots": 0
         }
       ]
@@ -651,7 +651,7 @@
     {
       "code": "3481",
       "name": "群創",
-      "sector": "電子工業",
+      "sector": "光電業",
       "total_lots": 9344,
       "trust_lots": -504,
       "foreign_lots": 7580,
@@ -666,7 +666,7 @@
     {
       "code": "2353",
       "name": "宏碁",
-      "sector": "電腦及週邊設備業",
+      "sector": "電子工業",
       "total_lots": 9218,
       "trust_lots": -826,
       "foreign_lots": 9221,
