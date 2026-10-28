@@ -1,241 +1,241 @@
 {
-  "report_date": "2026-10-28",
-  "prev_date": "2026-10-27",
+  "report_date": "2026-10-29",
+  "prev_date": "2026-10-28",
   "market": {
-    "taiex_proxy_change_pct": "-0.28%",
-    "taiex_proxy_close": 106.6,
-    "futures_foreign_net": -86043,
-    "futures_date": "2026-10-27"
+    "taiex_proxy_change_pct": "+1.92%",
+    "taiex_proxy_close": 108.65,
+    "futures_foreign_net": -84917,
+    "futures_date": "2026-10-28"
   },
   "top_sector": {
-    "name": "金融保險",
-    "net_buy_shares": 63299857
+    "name": "電子工業",
+    "net_buy_shares": 175033876
   },
   "momentum": [
     {
-      "code": "5880",
-      "foreign": 10719.3,
-      "trust": 1042.8,
-      "dealer": 1037.2,
-      "total": 12799.3,
-      "inst_text": "外資+10719.3張，投信+1042.8張，自營+1037.2張，合計+12799.3張",
-      "foreign_5d": 88310.9,
-      "trust_5d": 12652.5,
-      "dealer_5d": 6458.2,
-      "total_5d": 107421.6,
-      "margin_balance": 1594,
-      "margin_change_pct": 22.99,
-      "short_balance": 70,
-      "short_change_pct": 12.9,
-      "sbl_balance": 22044,
-      "sbl_change_1d": 290,
-      "sbl_use_rate": 386.36,
-      "sbl_change_5d": -4039,
-      "rsi": 70.3,
-      "macd": 0.513,
-      "macd_signal": 0.346,
-      "macd_hist": 0.167,
-      "k": 87.1,
-      "d": 84.2,
-      "ma20": 26.98,
-      "ma60": 26.35,
-      "ma240": 24.5,
-      "bb_upper": 28.73,
-      "bb_mid": 26.98,
-      "bb_lower": 25.23,
-      "vol_ratio": 1.66,
+      "code": "2409",
+      "foreign": 68585.2,
+      "trust": 181.7,
+      "dealer": 9162.7,
+      "total": 77929.6,
+      "inst_text": "外資+68585.2張，投信+181.7張，自營+9162.7張，合計+77929.6張",
+      "foreign_5d": -29466.6,
+      "trust_5d": 18378.4,
+      "dealer_5d": 3723.4,
+      "total_5d": -7364.8,
+      "margin_balance": 286334,
+      "margin_change_pct": -2.07,
+      "short_balance": 13061,
+      "short_change_pct": -33.75,
+      "sbl_balance": 754687,
+      "sbl_change_1d": 250,
+      "sbl_use_rate": 3296008.21,
+      "sbl_change_5d": 4241,
+      "rsi": 52.7,
+      "macd": 0.941,
+      "macd_signal": 1.471,
+      "macd_hist": -0.53,
+      "k": 37.9,
+      "d": 38.8,
+      "ma20": 36.42,
+      "ma60": 30.34,
+      "ma240": 21.05,
+      "bb_upper": 39.94,
+      "bb_mid": 36.42,
+      "bb_lower": 32.91,
+      "vol_ratio": 0.78,
       "price_5d": [
         {
-          "date": "2026-10-19",
-          "close": 28.05
-        },
-        {
           "date": "2026-10-20",
-          "close": 27.45
+          "close": 35.75
         },
         {
           "date": "2026-10-21",
-          "close": 28.0
+          "close": 37.25
         },
         {
           "date": "2026-10-22",
-          "close": 28.2
+          "close": 35.4
         },
         {
           "date": "2026-10-27",
-          "close": 28.8
+          "close": 33.45
+        },
+        {
+          "date": "2026-10-28",
+          "close": 35.55
         }
       ],
-      "pe": 18.82,
-      "pb": 1.56,
-      "div_yield": 3.65,
-      "gross_margin": null,
-      "pretax_margin": 51.71,
-      "rev_yoy": -2.36,
+      "pe": 148.13,
+      "pb": 1.74,
+      "div_yield": 1.13,
+      "gross_margin": 13.05,
+      "pretax_margin": 3.88,
+      "rev_yoy": -2.11,
       "fund_axes": {
-        "yield": 6,
-        "pe": 6,
+        "yield": 4,
+        "pe": 2,
         "pb": 8,
-        "gross": null,
-        "pretax": 10,
+        "gross": 2,
+        "pretax": 2,
         "rev": 2
       },
-      "fund_score": 38,
-      "fund_completeness": 83,
+      "fund_score": 20,
+      "fund_completeness": 100,
       "fund_eval": "watch",
-      "close": 28.8,
-      "spread": 0.6,
-      "spread_pct": "+2.13%"
+      "close": 35.55,
+      "spread": 2.1,
+      "spread_pct": "+6.28%"
     },
     {
-      "code": "2885",
-      "foreign": 6058.0,
-      "trust": 1390.8,
-      "dealer": 1006.5,
-      "total": 8455.3,
-      "inst_text": "外資+6058.0張，投信+1390.8張，自營+1006.5張，合計+8455.3張",
-      "foreign_5d": 77642.6,
-      "trust_5d": -2139.1,
-      "dealer_5d": 16144.3,
-      "total_5d": 91647.8,
-      "margin_balance": 1172,
-      "margin_change_pct": 8.52,
-      "short_balance": 7,
-      "short_change_pct": 0.0,
-      "sbl_balance": 25072,
-      "sbl_change_1d": 4886,
-      "sbl_use_rate": 361.39,
-      "sbl_change_5d": 6878,
-      "rsi": 62.4,
-      "macd": 1.093,
-      "macd_signal": 0.908,
-      "macd_hist": 0.185,
-      "k": 68.3,
-      "d": 66.1,
-      "ma20": 70.18,
-      "ma60": 68.24,
-      "ma240": 53.62,
-      "bb_upper": 73.91,
-      "bb_mid": 70.18,
-      "bb_lower": 66.45,
-      "vol_ratio": 1.38,
+      "code": "2344",
+      "foreign": 25347.8,
+      "trust": 179.3,
+      "dealer": 1208.7,
+      "total": 26735.9,
+      "inst_text": "外資+25347.8張，投信+179.3張，自營+1208.7張，合計+26735.9張",
+      "foreign_5d": 51468.0,
+      "trust_5d": -6587.9,
+      "dealer_5d": 8455.4,
+      "total_5d": 53335.5,
+      "margin_balance": 106023,
+      "margin_change_pct": -1.02,
+      "short_balance": 4109,
+      "short_change_pct": 9.75,
+      "sbl_balance": 98632,
+      "sbl_change_1d": -6924,
+      "sbl_use_rate": 445.41,
+      "sbl_change_5d": -739,
+      "rsi": 53.1,
+      "macd": -3.47,
+      "macd_signal": -3.334,
+      "macd_hist": -0.136,
+      "k": 56.6,
+      "d": 36.8,
+      "ma20": 168.65,
+      "ma60": 170.78,
+      "ma240": 127.54,
+      "bb_upper": 188.14,
+      "bb_mid": 168.65,
+      "bb_lower": 149.16,
+      "vol_ratio": 1.36,
       "price_5d": [
         {
-          "date": "2026-10-19",
-          "close": 71.7
-        },
-        {
           "date": "2026-10-20",
-          "close": 70.5
+          "close": 152.5
         },
         {
           "date": "2026-10-21",
-          "close": 71.3
+          "close": 159.5
         },
         {
           "date": "2026-10-22",
-          "close": 72.4
+          "close": 154.5
         },
         {
           "date": "2026-10-27",
-          "close": 73.2
+          "close": 163.0
+        },
+        {
+          "date": "2026-10-28",
+          "close": 172.0
         }
       ],
-      "pe": 17.14,
-      "pb": 2.55,
-      "div_yield": 3.01,
-      "gross_margin": null,
-      "pretax_margin": 45.56,
-      "rev_yoy": 71.12,
+      "pe": 18.96,
+      "pb": 4.69,
+      "div_yield": 0.29,
+      "gross_margin": 66.25,
+      "pretax_margin": 50.16,
+      "rev_yoy": 187.39,
       "fund_axes": {
-        "yield": 6,
+        "yield": 4,
         "pe": 6,
-        "pb": 6,
-        "gross": null,
+        "pb": 2,
+        "gross": 10,
         "pretax": 10,
         "rev": 10
       },
-      "fund_score": 46,
-      "fund_completeness": 83,
+      "fund_score": 42,
+      "fund_completeness": 100,
       "fund_eval": "strong",
-      "close": 73.2,
-      "spread": 0.8,
-      "spread_pct": "+1.1%"
+      "close": 172.0,
+      "spread": 9.0,
+      "spread_pct": "+5.52%"
     },
     {
-      "code": "2891",
-      "foreign": 7216.2,
-      "trust": -480.9,
-      "dealer": 1634.7,
-      "total": 8370.1,
-      "inst_text": "外資+7216.2張，投信-480.9張，自營+1634.7張，合計+8370.1張",
-      "foreign_5d": 53246.0,
-      "trust_5d": -293.2,
-      "dealer_5d": 25474.8,
-      "total_5d": 78427.6,
-      "margin_balance": 2191,
-      "margin_change_pct": 3.3,
-      "short_balance": 411,
-      "short_change_pct": 15.45,
-      "sbl_balance": 221969,
-      "sbl_change_1d": 8503,
-      "sbl_use_rate": 2094.85,
-      "sbl_change_5d": 7496,
-      "rsi": 67.4,
-      "macd": 1.785,
-      "macd_signal": 1.324,
-      "macd_hist": 0.461,
-      "k": 80.6,
-      "d": 77.2,
-      "ma20": 70.53,
-      "ma60": 67.74,
-      "ma240": 57.57,
-      "bb_upper": 75.9,
-      "bb_mid": 70.53,
-      "bb_lower": 65.15,
-      "vol_ratio": 1.42,
+      "code": "6770",
+      "foreign": 17434.0,
+      "trust": 369.0,
+      "dealer": 690.8,
+      "total": 18493.8,
+      "inst_text": "外資+17434.0張，投信+369.0張，自營+690.8張，合計+18493.8張",
+      "foreign_5d": -59123.5,
+      "trust_5d": 26377.0,
+      "dealer_5d": 817.0,
+      "total_5d": -31929.5,
+      "margin_balance": 133605,
+      "margin_change_pct": 1.63,
+      "short_balance": 2103,
+      "short_change_pct": 10.28,
+      "sbl_balance": 220952,
+      "sbl_change_1d": 1438,
+      "sbl_use_rate": 646.02,
+      "sbl_change_5d": 16051,
+      "rsi": 53.1,
+      "macd": -0.957,
+      "macd_signal": -0.821,
+      "macd_hist": -0.136,
+      "k": 55.8,
+      "d": 37.2,
+      "ma20": 70.58,
+      "ma60": 69.49,
+      "ma240": 60.11,
+      "bb_upper": 77.99,
+      "bb_mid": 70.58,
+      "bb_lower": 63.17,
+      "vol_ratio": 1.63,
       "price_5d": [
         {
-          "date": "2026-10-19",
-          "close": 73.4
-        },
-        {
           "date": "2026-10-20",
-          "close": 71.6
+          "close": 64.1
         },
         {
           "date": "2026-10-21",
-          "close": 74.8
+          "close": 66.2
         },
         {
           "date": "2026-10-22",
-          "close": 74.9
+          "close": 66.4
         },
         {
           "date": "2026-10-27",
-          "close": 75.0
+          "close": 69.4
+        },
+        {
+          "date": "2026-10-28",
+          "close": 71.3
         }
       ],
-      "pe": 17.94,
-      "pb": 2.14,
-      "div_yield": 3.33,
-      "gross_margin": null,
-      "pretax_margin": 35.61,
-      "rev_yoy": 4.84,
+      "pe": 23.77,
+      "pb": 2.61,
+      "div_yield": 0.0,
+      "gross_margin": 28.28,
+      "pretax_margin": 22.49,
+      "rev_yoy": 52.49,
       "fund_axes": {
-        "yield": 6,
-        "pe": 6,
+        "yield": 4,
+        "pe": 4,
         "pb": 6,
-        "gross": null,
+        "gross": 4,
         "pretax": 10,
-        "rev": 2
+        "rev": 10
       },
-      "fund_score": 36,
-      "fund_completeness": 83,
+      "fund_score": 38,
+      "fund_completeness": 100,
       "fund_eval": "watch",
-      "close": 75.0,
-      "spread": 0.1,
-      "spread_pct": "+0.13%"
+      "close": 71.3,
+      "spread": 1.9,
+      "spread_pct": "+2.74%"
     }
   ]
 }
