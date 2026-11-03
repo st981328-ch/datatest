@@ -1,497 +1,497 @@
 {
-  "report_date": "2026-11-03",
-  "prev": "2026-11-02",
+  "report_date": "2026-11-04",
+  "prev": "2026-11-03",
   "gate": "有明確族群成團",
-  "formed_count": 8,
+  "formed_count": 5,
   "groups": [
     {
-      "sector": "航運業",
-      "net_lots": 35794,
-      "trust_lots": 5840,
-      "buy_n": 21,
-      "sell_n": 5,
-      "breadth": 81,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2610",
-          "name": "華航",
-          "total_lots": 18224,
-          "trust_lots": -38
-        },
-        {
-          "code": "2618",
-          "name": "長榮航",
-          "total_lots": 7111,
-          "trust_lots": 1599
-        },
-        {
-          "code": "2609",
-          "name": "陽明",
-          "total_lots": 5957,
-          "trust_lots": -5
-        },
-        {
-          "code": "2603",
-          "name": "長榮",
-          "total_lots": 2021,
-          "trust_lots": 1550
-        },
-        {
-          "code": "2633",
-          "name": "台灣高鐵",
-          "total_lots": 1139,
-          "trust_lots": 13
-        }
-      ]
-    },
-    {
-      "sector": "其他電子業",
-      "net_lots": 28626,
-      "trust_lots": 901,
-      "buy_n": 25,
-      "sell_n": 14,
-      "breadth": 64,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2317",
-          "name": "鴻海",
-          "total_lots": 27006,
-          "trust_lots": 946
-        },
-        {
-          "code": "2312",
-          "name": "金寶",
-          "total_lots": 1326,
-          "trust_lots": 0
-        },
-        {
-          "code": "2354",
-          "name": "鴻準",
-          "total_lots": 941,
-          "trust_lots": 11
-        },
-        {
-          "code": "6139",
-          "name": "亞翔",
-          "total_lots": 170,
-          "trust_lots": 0
-        },
-        {
-          "code": "2495",
-          "name": "普安",
-          "total_lots": 163,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
-      "sector": "電子工業",
-      "net_lots": 16502,
-      "trust_lots": 6212,
-      "buy_n": 104,
-      "sell_n": 89,
-      "breadth": 54,
-      "formed": false,
-      "leaders": [
-        {
-          "code": "3481",
-          "name": "群創",
-          "total_lots": 30585,
-          "trust_lots": 251
-        },
-        {
-          "code": "3376",
-          "name": "新日興",
-          "total_lots": 1829,
-          "trust_lots": -395
-        },
-        {
-          "code": "2376",
-          "name": "技嘉",
-          "total_lots": 800,
-          "trust_lots": 216
-        },
-        {
-          "code": "3026",
-          "name": "禾伸堂",
-          "total_lots": 730,
-          "trust_lots": -964
-        },
-        {
-          "code": "3715",
-          "name": "定穎投控",
-          "total_lots": 671,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
-      "sector": "金融保險",
-      "net_lots": 15052,
-      "trust_lots": 45023,
-      "buy_n": 26,
-      "sell_n": 16,
-      "breadth": 62,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "5880",
-          "name": "合庫金",
-          "total_lots": 6571,
-          "trust_lots": 1207
-        },
-        {
-          "code": "2801",
-          "name": "彰銀",
-          "total_lots": 5882,
-          "trust_lots": 4074
-        },
-        {
-          "code": "2886",
-          "name": "兆豐金",
-          "total_lots": 4777,
-          "trust_lots": -1273
-        },
-        {
-          "code": "2834",
-          "name": "臺企銀",
-          "total_lots": 2571,
-          "trust_lots": 0
-        },
-        {
-          "code": "2891",
-          "name": "中信金",
-          "total_lots": 2214,
-          "trust_lots": 7763
-        }
-      ]
-    },
-    {
-      "sector": "光電業",
-      "net_lots": 14225,
-      "trust_lots": -2249,
-      "buy_n": 40,
-      "sell_n": 21,
-      "breadth": 66,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2409",
-          "name": "友達",
-          "total_lots": 10866,
-          "trust_lots": -1328
-        },
-        {
-          "code": "4960",
-          "name": "誠美材",
-          "total_lots": 1573,
-          "trust_lots": 0
-        },
-        {
-          "code": "3714",
-          "name": "富采",
-          "total_lots": 1152,
-          "trust_lots": -962
-        },
-        {
-          "code": "6116",
-          "name": "彩晶",
-          "total_lots": 920,
-          "trust_lots": 0
-        },
-        {
-          "code": "2489",
-          "name": "瑞軒",
-          "total_lots": 755,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
-      "sector": "鋼鐵工業",
-      "net_lots": 12159,
-      "trust_lots": 4013,
-      "buy_n": 23,
-      "sell_n": 8,
-      "breadth": 74,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2002",
-          "name": "中鋼",
-          "total_lots": 8933,
-          "trust_lots": 2013
-        },
-        {
-          "code": "2027",
-          "name": "大成鋼",
-          "total_lots": 1167,
-          "trust_lots": 1251
-        },
-        {
-          "code": "3004",
-          "name": "豐達科",
-          "total_lots": 560,
-          "trust_lots": 0
-        },
-        {
-          "code": "2023",
-          "name": "燁輝",
-          "total_lots": 450,
-          "trust_lots": 0
-        },
-        {
-          "code": "9958",
-          "name": "世紀鋼",
-          "total_lots": 390,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
-      "sector": "電器電纜",
-      "net_lots": 10217,
-      "trust_lots": 1781,
-      "buy_n": 14,
-      "sell_n": 1,
-      "breadth": 93,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "1605",
-          "name": "華新",
-          "total_lots": 9012,
-          "trust_lots": 1780
-        },
-        {
-          "code": "1609",
-          "name": "大亞",
-          "total_lots": 1073,
-          "trust_lots": 0
-        },
-        {
-          "code": "1617",
-          "name": "榮星",
-          "total_lots": 182,
-          "trust_lots": 0
-        },
-        {
-          "code": "1616",
-          "name": "億泰",
-          "total_lots": 96,
-          "trust_lots": 0
-        },
-        {
-          "code": "1611",
-          "name": "中電",
-          "total_lots": 80,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
-      "sector": "電機機械",
-      "net_lots": 7675,
-      "trust_lots": 596,
-      "buy_n": 29,
-      "sell_n": 21,
-      "breadth": 58,
-      "formed": true,
-      "leaders": [
-        {
-          "code": "2371",
-          "name": "大同",
-          "total_lots": 4367,
-          "trust_lots": 5
-        },
-        {
-          "code": "1528",
-          "name": "恩德",
-          "total_lots": 1919,
-          "trust_lots": 0
-        },
-        {
-          "code": "1504",
-          "name": "東元",
-          "total_lots": 1053,
-          "trust_lots": 0
-        },
-        {
-          "code": "4526",
-          "name": "東台",
-          "total_lots": 791,
-          "trust_lots": 0
-        },
-        {
-          "code": "4566",
-          "name": "時碩工業",
-          "total_lots": 359,
-          "trust_lots": 0
-        }
-      ]
-    },
-    {
       "sector": "玻璃陶瓷",
-      "net_lots": 5859,
-      "trust_lots": 410,
-      "buy_n": 5,
-      "sell_n": 0,
-      "breadth": 100,
-      "formed": true,
+      "net_lots": 71899,
+      "trust_lots": 17366,
+      "buy_n": 4,
+      "sell_n": 1,
+      "breadth": 80,
+      "formed": false,
       "leaders": [
         {
           "code": "1802",
           "name": "台玻",
-          "total_lots": 5134,
-          "trust_lots": 410
-        },
-        {
-          "code": "1809",
-          "name": "中釉",
-          "total_lots": 657,
-          "trust_lots": 0
+          "total_lots": 71834,
+          "trust_lots": 17366
         },
         {
           "code": "1810",
           "name": "和成",
-          "total_lots": 56,
+          "total_lots": 305,
           "trust_lots": 0
         },
         {
           "code": "1806",
           "name": "冠軍",
-          "total_lots": 12,
+          "total_lots": 53,
           "trust_lots": 0
         },
         {
           "code": "1817",
           "name": "凱撒衛",
-          "total_lots": 0,
+          "total_lots": 5,
+          "trust_lots": 0
+        },
+        {
+          "code": "1809",
+          "name": "中釉",
+          "total_lots": -298,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "航運業",
+      "net_lots": 34828,
+      "trust_lots": 1555,
+      "buy_n": 14,
+      "sell_n": 12,
+      "breadth": 54,
+      "formed": false,
+      "leaders": [
+        {
+          "code": "2618",
+          "name": "長榮航",
+          "total_lots": 18744,
+          "trust_lots": 1487
+        },
+        {
+          "code": "2610",
+          "name": "華航",
+          "total_lots": 16247,
+          "trust_lots": -373
+        },
+        {
+          "code": "2609",
+          "name": "陽明",
+          "total_lots": 1860,
+          "trust_lots": 2
+        },
+        {
+          "code": "2633",
+          "name": "台灣高鐵",
+          "total_lots": 743,
+          "trust_lots": -149
+        },
+        {
+          "code": "2634",
+          "name": "漢翔",
+          "total_lots": 713,
+          "trust_lots": 21
+        }
+      ]
+    },
+    {
+      "sector": "鋼鐵工業",
+      "net_lots": 18517,
+      "trust_lots": 1568,
+      "buy_n": 26,
+      "sell_n": 5,
+      "breadth": 84,
+      "formed": true,
+      "leaders": [
+        {
+          "code": "2002",
+          "name": "中鋼",
+          "total_lots": 13566,
+          "trust_lots": 1805
+        },
+        {
+          "code": "2030",
+          "name": "彰源",
+          "total_lots": 1631,
+          "trust_lots": 0
+        },
+        {
+          "code": "2034",
+          "name": "允強",
+          "total_lots": 1125,
+          "trust_lots": 0
+        },
+        {
+          "code": "2023",
+          "name": "燁輝",
+          "total_lots": 748,
+          "trust_lots": 3
+        },
+        {
+          "code": "2033",
+          "name": "佳大",
+          "total_lots": 516,
           "trust_lots": 0
         }
       ]
     },
     {
       "sector": "其他",
-      "net_lots": 2991,
-      "trust_lots": 2242,
-      "buy_n": 55,
-      "sell_n": 21,
-      "breadth": 72,
-      "formed": false,
+      "net_lots": 15132,
+      "trust_lots": 564,
+      "buy_n": 45,
+      "sell_n": 33,
+      "breadth": 58,
+      "formed": true,
       "leaders": [
         {
           "code": "9904",
           "name": "寶成",
-          "total_lots": 3098,
-          "trust_lots": 45
+          "total_lots": 9497,
+          "trust_lots": -369
+        },
+        {
+          "code": "9945",
+          "name": "潤泰新",
+          "total_lots": 1421,
+          "trust_lots": 34
         },
         {
           "code": "9939",
           "name": "宏全",
-          "total_lots": 846,
-          "trust_lots": 0
+          "total_lots": 1332,
+          "trust_lots": -1
         },
         {
-          "code": "9917",
-          "name": "中保科",
-          "total_lots": 279,
-          "trust_lots": 0
+          "code": "9910",
+          "name": "豐泰",
+          "total_lots": 1105,
+          "trust_lots": 4
         },
         {
-          "code": "9941",
-          "name": "裕融",
-          "total_lots": 221,
-          "trust_lots": 0
-        },
-        {
-          "code": "9907",
-          "name": "統一實",
-          "total_lots": 173,
-          "trust_lots": 1
+          "code": "9933",
+          "name": "中鼎",
+          "total_lots": 810,
+          "trust_lots": 47
         }
       ]
     },
     {
-      "sector": "建材營造",
-      "net_lots": 2296,
-      "trust_lots": -23,
-      "buy_n": 34,
-      "sell_n": 16,
-      "breadth": 68,
+      "sector": "水泥工業",
+      "net_lots": 9079,
+      "trust_lots": 5,
+      "buy_n": 5,
+      "sell_n": 2,
+      "breadth": 71,
+      "formed": true,
+      "leaders": [
+        {
+          "code": "1101",
+          "name": "台泥",
+          "total_lots": 5998,
+          "trust_lots": 64
+        },
+        {
+          "code": "1102",
+          "name": "亞泥",
+          "total_lots": 3015,
+          "trust_lots": -59
+        },
+        {
+          "code": "1103",
+          "name": "嘉泥",
+          "total_lots": 83,
+          "trust_lots": 0
+        },
+        {
+          "code": "1108",
+          "name": "幸福",
+          "total_lots": 40,
+          "trust_lots": 0
+        },
+        {
+          "code": "1104",
+          "name": "環泥",
+          "total_lots": 40,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "食品工業",
+      "net_lots": 7691,
+      "trust_lots": -206,
+      "buy_n": 16,
+      "sell_n": 7,
+      "breadth": 70,
+      "formed": true,
+      "leaders": [
+        {
+          "code": "1216",
+          "name": "統一",
+          "total_lots": 6238,
+          "trust_lots": -212
+        },
+        {
+          "code": "1229",
+          "name": "聯華",
+          "total_lots": 582,
+          "trust_lots": 4
+        },
+        {
+          "code": "1227",
+          "name": "佳格",
+          "total_lots": 539,
+          "trust_lots": 0
+        },
+        {
+          "code": "1232",
+          "name": "大統益",
+          "total_lots": 243,
+          "trust_lots": 0
+        },
+        {
+          "code": "1217",
+          "name": "愛之味",
+          "total_lots": 189,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "電腦及週邊設備業",
+      "net_lots": 5690,
+      "trust_lots": 2007,
+      "buy_n": 10,
+      "sell_n": 5,
+      "breadth": 67,
+      "formed": true,
+      "leaders": [
+        {
+          "code": "4938",
+          "name": "和碩",
+          "total_lots": 2944,
+          "trust_lots": -418
+        },
+        {
+          "code": "2352",
+          "name": "佳世達",
+          "total_lots": 1600,
+          "trust_lots": 28
+        },
+        {
+          "code": "2395",
+          "name": "研華",
+          "total_lots": 529,
+          "trust_lots": 30
+        },
+        {
+          "code": "2442",
+          "name": "新美齊",
+          "total_lots": 456,
+          "trust_lots": 0
+        },
+        {
+          "code": "2382",
+          "name": "廣達",
+          "total_lots": 437,
+          "trust_lots": 2367
+        }
+      ]
+    },
+    {
+      "sector": "金融保險",
+      "net_lots": 5575,
+      "trust_lots": 51869,
+      "buy_n": 23,
+      "sell_n": 19,
+      "breadth": 55,
       "formed": false,
       "leaders": [
         {
-          "code": "5521",
-          "name": "工信",
-          "total_lots": 466,
-          "trust_lots": 0
+          "code": "2886",
+          "name": "兆豐金",
+          "total_lots": 13023,
+          "trust_lots": 3020
         },
         {
-          "code": "1808",
-          "name": "潤隆",
-          "total_lots": 333,
-          "trust_lots": 0
+          "code": "2887",
+          "name": "台新新光金",
+          "total_lots": 9923,
+          "trust_lots": 11273
         },
         {
-          "code": "2539",
-          "name": "櫻花建",
-          "total_lots": 312,
-          "trust_lots": 1
+          "code": "2891",
+          "name": "中信金",
+          "total_lots": 4708,
+          "trust_lots": 11777
         },
         {
-          "code": "2501",
-          "name": "國建",
-          "total_lots": 262,
-          "trust_lots": 0
+          "code": "5880",
+          "name": "合庫金",
+          "total_lots": 3665,
+          "trust_lots": 699
         },
         {
-          "code": "2542",
-          "name": "興富發",
-          "total_lots": 209,
-          "trust_lots": -25
+          "code": "5876",
+          "name": "上海商銀",
+          "total_lots": 2702,
+          "trust_lots": 170
         }
       ]
     },
     {
-      "sector": "塑膠工業",
-      "net_lots": 1989,
-      "trust_lots": 6749,
-      "buy_n": 8,
+      "sector": "化學工業",
+      "net_lots": 3858,
+      "trust_lots": 49,
+      "buy_n": 11,
       "sell_n": 13,
-      "breadth": 38,
+      "breadth": 46,
       "formed": false,
       "leaders": [
         {
-          "code": "1301",
-          "name": "台塑",
-          "total_lots": 2687,
-          "trust_lots": 878
-        },
-        {
-          "code": "1326",
-          "name": "台化",
-          "total_lots": 2184,
-          "trust_lots": 1755
-        },
-        {
-          "code": "1303",
-          "name": "南亞",
-          "total_lots": 465,
-          "trust_lots": 4116
-        },
-        {
-          "code": "1308",
-          "name": "亞聚",
-          "total_lots": 52,
+          "code": "1709",
+          "name": "和益",
+          "total_lots": 3786,
           "trust_lots": 0
         },
         {
-          "code": "1321",
-          "name": "大洋",
-          "total_lots": 30,
+          "code": "1714",
+          "name": "和桐",
+          "total_lots": 1633,
+          "trust_lots": 0
+        },
+        {
+          "code": "4764",
+          "name": "雙鍵",
+          "total_lots": 666,
+          "trust_lots": 0
+        },
+        {
+          "code": "1718",
+          "name": "中纖",
+          "total_lots": 632,
+          "trust_lots": 0
+        },
+        {
+          "code": "4720",
+          "name": "德淵",
+          "total_lots": 391,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "通信網路業",
+      "net_lots": 2519,
+      "trust_lots": 4638,
+      "buy_n": 16,
+      "sell_n": 20,
+      "breadth": 44,
+      "formed": false,
+      "leaders": [
+        {
+          "code": "3045",
+          "name": "台灣大",
+          "total_lots": 3379,
+          "trust_lots": 1400
+        },
+        {
+          "code": "2412",
+          "name": "中華電",
+          "total_lots": 2228,
+          "trust_lots": 2069
+        },
+        {
+          "code": "4904",
+          "name": "遠傳",
+          "total_lots": 1535,
+          "trust_lots": 1537
+        },
+        {
+          "code": "6442",
+          "name": "光聖",
+          "total_lots": 381,
+          "trust_lots": -132
+        },
+        {
+          "code": "3311",
+          "name": "閎暉",
+          "total_lots": 245,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "油電燃氣業",
+      "net_lots": 2038,
+      "trust_lots": -895,
+      "buy_n": 9,
+      "sell_n": 0,
+      "breadth": 100,
+      "formed": false,
+      "leaders": [
+        {
+          "code": "6505",
+          "name": "台塑化",
+          "total_lots": 1851,
+          "trust_lots": -908
+        },
+        {
+          "code": "9908",
+          "name": "大台北",
+          "total_lots": 63,
+          "trust_lots": 0
+        },
+        {
+          "code": "8908",
+          "name": "欣雄",
+          "total_lots": 40,
+          "trust_lots": 0
+        },
+        {
+          "code": "9937",
+          "name": "全國",
+          "total_lots": 37,
+          "trust_lots": 0
+        },
+        {
+          "code": "9931",
+          "name": "欣高",
+          "total_lots": 14,
+          "trust_lots": 0
+        }
+      ]
+    },
+    {
+      "sector": "生技醫療業",
+      "net_lots": 1763,
+      "trust_lots": 21,
+      "buy_n": 9,
+      "sell_n": 2,
+      "breadth": 82,
+      "formed": false,
+      "leaders": [
+        {
+          "code": "6446",
+          "name": "藥華藥",
+          "total_lots": 1163,
+          "trust_lots": 21
+        },
+        {
+          "code": "6467",
+          "name": "泰合",
+          "total_lots": 452,
+          "trust_lots": 0
+        },
+        {
+          "code": "6589",
+          "name": "台康生技",
+          "total_lots": 64,
+          "trust_lots": 0
+        },
+        {
+          "code": "6541",
+          "name": "泰福-KY",
+          "total_lots": 62,
+          "trust_lots": 0
+        },
+        {
+          "code": "1760",
+          "name": "寶齡富錦",
+          "total_lots": 51,
           "trust_lots": 0
         }
       ]
@@ -499,429 +499,429 @@
   ],
   "top_stocks": [
     {
-      "code": "3481",
-      "name": "群創",
-      "sector": "電子工業",
-      "total_lots": 30585,
-      "trust_lots": 251,
-      "foreign_lots": 26639,
-      "price": 44.55,
-      "near_high_pct": 38.6,
-      "new52": false,
-      "new20": false,
-      "above_ma60": false,
-      "chg5": -4.7,
-      "chg20": -18.6
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "sector": "其他電子業",
-      "total_lots": 27006,
-      "trust_lots": 946,
-      "foreign_lots": 24201,
-      "price": 251.0,
-      "near_high_pct": 20.1,
-      "new52": false,
-      "new20": false,
-      "above_ma60": true,
-      "chg5": 2.4,
-      "chg20": -0.2
-    },
-    {
-      "code": "2610",
-      "name": "華航",
-      "sector": "航運業",
-      "total_lots": 18224,
-      "trust_lots": -38,
-      "foreign_lots": 18190,
-      "price": 20.65,
+      "code": "1802",
+      "name": "台玻",
+      "sector": "玻璃陶瓷",
+      "total_lots": 71834,
+      "trust_lots": 17366,
+      "foreign_lots": 54775,
+      "price": 67.7,
       "near_high_pct": 16.6,
       "new52": false,
-      "new20": false,
+      "new20": true,
       "above_ma60": true,
-      "chg5": 0.7,
-      "chg20": 1.0
-    },
-    {
-      "code": "2409",
-      "name": "友達",
-      "sector": "光電業",
-      "total_lots": 10866,
-      "trust_lots": -1328,
-      "foreign_lots": 12372,
-      "price": 30.75,
-      "near_high_pct": 29.4,
-      "new52": false,
-      "new20": false,
-      "above_ma60": false,
-      "chg5": -13.1,
-      "chg20": -20.2
-    },
-    {
-      "code": "1605",
-      "name": "華新",
-      "sector": "電器電纜",
-      "total_lots": 9012,
-      "trust_lots": 1780,
-      "foreign_lots": 6531,
-      "price": 37.6,
-      "near_high_pct": 19.1,
-      "new52": false,
-      "new20": false,
-      "above_ma60": false,
-      "chg5": 1.6,
-      "chg20": -2.1
-    },
-    {
-      "code": "2002",
-      "name": "中鋼",
-      "sector": "鋼鐵工業",
-      "total_lots": 8933,
-      "trust_lots": 2013,
-      "foreign_lots": 6756,
-      "price": 19.4,
-      "near_high_pct": 10.2,
-      "new52": false,
-      "new20": false,
-      "above_ma60": true,
-      "chg5": -0.8,
-      "chg20": 1.0
+      "chg5": 3.8,
+      "chg20": 15.1
     },
     {
       "code": "2618",
       "name": "長榮航",
       "sector": "航運業",
-      "total_lots": 7111,
-      "trust_lots": 1599,
-      "foreign_lots": 5215,
-      "price": 43.15,
-      "near_high_pct": 5.5,
-      "new52": false,
-      "new20": false,
-      "above_ma60": true,
-      "chg5": 2.3,
-      "chg20": 0.7
-    },
-    {
-      "code": "5880",
-      "name": "合庫金",
-      "sector": "金融保險",
-      "total_lots": 6571,
-      "trust_lots": 1207,
-      "foreign_lots": 4462,
-      "price": 29.05,
-      "near_high_pct": 1.5,
+      "total_lots": 18744,
+      "trust_lots": 1487,
+      "foreign_lots": 15648,
+      "price": 43.7,
+      "near_high_pct": 4.3,
       "new52": false,
       "new20": true,
       "above_ma60": true,
-      "chg5": 3.0,
-      "chg20": 11.3
+      "chg5": 1.7,
+      "chg20": 3.6
     },
     {
-      "code": "2609",
-      "name": "陽明",
+      "code": "2610",
+      "name": "華航",
       "sector": "航運業",
-      "total_lots": 5957,
-      "trust_lots": -5,
-      "foreign_lots": 5783,
-      "price": 64.0,
-      "near_high_pct": 8.4,
+      "total_lots": 16247,
+      "trust_lots": -373,
+      "foreign_lots": 16255,
+      "price": 20.7,
+      "near_high_pct": 16.4,
       "new52": false,
       "new20": false,
       "above_ma60": true,
-      "chg5": 3.4,
-      "chg20": 7.7
+      "chg5": 1.2,
+      "chg20": 2.0
     },
     {
-      "code": "2801",
-      "name": "彰銀",
-      "sector": "金融保險",
-      "total_lots": 5882,
-      "trust_lots": 4074,
-      "foreign_lots": 1703,
-      "price": 30.85,
-      "near_high_pct": 1.0,
-      "new52": false,
-      "new20": true,
-      "above_ma60": true,
-      "chg5": 3.2,
-      "chg20": 11.8
-    },
-    {
-      "code": "1802",
-      "name": "台玻",
-      "sector": "玻璃陶瓷",
-      "total_lots": 5134,
-      "trust_lots": 410,
-      "foreign_lots": 4438,
-      "price": 63.7,
-      "near_high_pct": 21.6,
+      "code": "2002",
+      "name": "中鋼",
+      "sector": "鋼鐵工業",
+      "total_lots": 13566,
+      "trust_lots": 1805,
+      "foreign_lots": 12251,
+      "price": 19.35,
+      "near_high_pct": 10.4,
       "new52": false,
       "new20": false,
       "above_ma60": true,
-      "chg5": -5.1,
-      "chg20": 6.3
+      "chg5": -2.0,
+      "chg20": 2.1
     },
     {
       "code": "2886",
       "name": "兆豐金",
       "sector": "金融保險",
-      "total_lots": 4777,
-      "trust_lots": -1273,
-      "foreign_lots": 4667,
-      "price": 54.1,
-      "near_high_pct": 3.4,
+      "total_lots": 13023,
+      "trust_lots": 3020,
+      "foreign_lots": 6603,
+      "price": 53.2,
+      "near_high_pct": 5.0,
       "new52": false,
       "new20": false,
       "above_ma60": true,
-      "chg5": -2.0,
-      "chg20": 10.1
+      "chg5": -3.3,
+      "chg20": 8.9
     },
     {
-      "code": "2371",
-      "name": "大同",
-      "sector": "電機機械",
-      "total_lots": 4367,
-      "trust_lots": 5,
-      "foreign_lots": 2756,
-      "price": 29.8,
-      "near_high_pct": 33.0,
+      "code": "2887",
+      "name": "台新新光金",
+      "sector": "金融保險",
+      "total_lots": 9923,
+      "trust_lots": 11273,
+      "foreign_lots": -7286,
+      "price": 41.25,
+      "near_high_pct": 7.9,
       "new52": false,
       "new20": false,
       "above_ma60": true,
-      "chg5": 5.3,
-      "chg20": -2.1
-    },
-    {
-      "code": "1216",
-      "name": "統一",
-      "sector": "食品工業",
-      "total_lots": 4259,
-      "trust_lots": 1005,
-      "foreign_lots": 2587,
-      "price": 80.6,
-      "near_high_pct": 2.9,
-      "new52": false,
-      "new20": true,
-      "above_ma60": true,
-      "chg5": 1.3,
-      "chg20": 8.6
+      "chg5": -2.3,
+      "chg20": 0.0
     },
     {
       "code": "9904",
       "name": "寶成",
       "sector": "其他",
-      "total_lots": 3098,
-      "trust_lots": 45,
-      "foreign_lots": 3002,
-      "price": 25.85,
-      "near_high_pct": 20.2,
+      "total_lots": 9497,
+      "trust_lots": -369,
+      "foreign_lots": 9260,
+      "price": 25.9,
+      "near_high_pct": 20.1,
       "new52": false,
       "new20": false,
       "above_ma60": true,
-      "chg5": -1.9,
-      "chg20": 3.6
+      "chg5": 0.0,
+      "chg20": 4.2
     },
     {
-      "code": "2468",
-      "name": "華經",
-      "sector": "資訊服務業",
-      "total_lots": 2956,
-      "trust_lots": 0,
-      "foreign_lots": 2953
+      "code": "1216",
+      "name": "統一",
+      "sector": "食品工業",
+      "total_lots": 6238,
+      "trust_lots": -212,
+      "foreign_lots": 4657,
+      "price": 81.1,
+      "near_high_pct": 2.3,
+      "new52": false,
+      "new20": true,
+      "above_ma60": true,
+      "chg5": 1.1,
+      "chg20": 9.7
     },
     {
-      "code": "1301",
-      "name": "台塑",
-      "sector": "塑膠工業",
-      "total_lots": 2687,
-      "trust_lots": 878,
-      "foreign_lots": 1423
-    },
-    {
-      "code": "2834",
-      "name": "臺企銀",
-      "sector": "金融保險",
-      "total_lots": 2571,
-      "trust_lots": 0,
-      "foreign_lots": 2495
+      "code": "1101",
+      "name": "台泥",
+      "sector": "水泥工業",
+      "total_lots": 5998,
+      "trust_lots": 64,
+      "foreign_lots": 8085,
+      "price": 27.7,
+      "near_high_pct": 3.8,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -1.4,
+      "chg20": 8.4
     },
     {
       "code": "2891",
       "name": "中信金",
       "sector": "金融保險",
-      "total_lots": 2214,
-      "trust_lots": 7763,
-      "foreign_lots": -6587
-    },
-    {
-      "code": "1326",
-      "name": "台化",
-      "sector": "塑膠工業",
-      "total_lots": 2184,
-      "trust_lots": 1755,
-      "foreign_lots": 372
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "sector": "半導體業",
-      "total_lots": 2104,
-      "trust_lots": 526,
-      "foreign_lots": 1252
-    },
-    {
-      "code": "2603",
-      "name": "長榮",
-      "sector": "航運業",
-      "total_lots": 2021,
-      "trust_lots": 1550,
-      "foreign_lots": 345
-    },
-    {
-      "code": "1528",
-      "name": "恩德",
-      "sector": "電機機械",
-      "total_lots": 1919,
-      "trust_lots": 0,
-      "foreign_lots": 1921
-    },
-    {
-      "code": "1402",
-      "name": "遠東新",
-      "sector": "紡織纖維",
-      "total_lots": 1830,
-      "trust_lots": -34,
-      "foreign_lots": 1784
-    },
-    {
-      "code": "3376",
-      "name": "新日興",
-      "sector": "電子工業",
-      "total_lots": 1829,
-      "trust_lots": -395,
-      "foreign_lots": 2160
-    },
-    {
-      "code": "2820",
-      "name": "華票",
-      "sector": "金融保險",
-      "total_lots": 1652,
-      "trust_lots": 0,
-      "foreign_lots": 1740
-    },
-    {
-      "code": "2882",
-      "name": "國泰金",
-      "sector": "金融保險",
-      "total_lots": 1625,
-      "trust_lots": 5222,
-      "foreign_lots": -4035
-    },
-    {
-      "code": "4960",
-      "name": "誠美材",
-      "sector": "光電業",
-      "total_lots": 1573,
-      "trust_lots": 0,
-      "foreign_lots": 2083
-    },
-    {
-      "code": "1102",
-      "name": "亞泥",
-      "sector": "水泥工業",
-      "total_lots": 1560,
-      "trust_lots": 24,
-      "foreign_lots": 1363
-    },
-    {
-      "code": "3045",
-      "name": "台灣大",
-      "sector": "通信網路業",
-      "total_lots": 1537,
-      "trust_lots": 1555,
-      "foreign_lots": 407
-    },
-    {
-      "code": "2105",
-      "name": "正新",
-      "sector": "橡膠工業",
-      "total_lots": 1416,
-      "trust_lots": -34,
-      "foreign_lots": 1365
-    },
-    {
-      "code": "4904",
-      "name": "遠傳",
-      "sector": "通信網路業",
-      "total_lots": 1336,
-      "trust_lots": 1690,
-      "foreign_lots": -661
-    },
-    {
-      "code": "2312",
-      "name": "金寶",
-      "sector": "其他電子業",
-      "total_lots": 1326,
-      "trust_lots": 0,
-      "foreign_lots": 1375
-    },
-    {
-      "code": "8039",
-      "name": "台虹",
-      "sector": "電子零組件業",
-      "total_lots": 1317,
-      "trust_lots": -157,
-      "foreign_lots": 1517
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "sector": "電腦及週邊設備業",
-      "total_lots": 1213,
-      "trust_lots": 419,
-      "foreign_lots": 590
-    },
-    {
-      "code": "4938",
-      "name": "和碩",
-      "sector": "電腦及週邊設備業",
-      "total_lots": 1180,
-      "trust_lots": 3017,
-      "foreign_lots": -1873
-    },
-    {
-      "code": "2027",
-      "name": "大成鋼",
-      "sector": "鋼鐵工業",
-      "total_lots": 1167,
-      "trust_lots": 1251,
-      "foreign_lots": -128
-    },
-    {
-      "code": "3714",
-      "name": "富采",
-      "sector": "光電業",
-      "total_lots": 1152,
-      "trust_lots": -962,
-      "foreign_lots": 1951
-    },
-    {
-      "code": "2633",
-      "name": "台灣高鐵",
-      "sector": "航運業",
-      "total_lots": 1139,
-      "trust_lots": 13,
-      "foreign_lots": 1060
+      "total_lots": 4708,
+      "trust_lots": 11777,
+      "foreign_lots": -10923,
+      "price": 74.2,
+      "near_high_pct": 3.5,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -1.1,
+      "chg20": 9.3
     },
     {
       "code": "1709",
       "name": "和益",
       "sector": "化學工業",
-      "total_lots": 1137,
+      "total_lots": 3786,
+      "trust_lots": 0,
+      "foreign_lots": 3787,
+      "price": 44.0,
+      "near_high_pct": 33.6,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -15.4,
+      "chg20": -17.3
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "sector": "金融保險",
+      "total_lots": 3665,
+      "trust_lots": 699,
+      "foreign_lots": 1554,
+      "price": 28.45,
+      "near_high_pct": 3.6,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -1.2,
+      "chg20": 9.4
+    },
+    {
+      "code": "2317",
+      "name": "鴻海",
+      "sector": "其他電子業",
+      "total_lots": 3627,
+      "trust_lots": 427,
+      "foreign_lots": 2394,
+      "price": 245.5,
+      "near_high_pct": 21.8,
+      "new52": false,
+      "new20": false,
+      "above_ma60": false,
+      "chg5": -0.8,
+      "chg20": -3.3
+    },
+    {
+      "code": "1402",
+      "name": "遠東新",
+      "sector": "紡織纖維",
+      "total_lots": 3434,
+      "trust_lots": -57,
+      "foreign_lots": 3572,
+      "price": 28.55,
+      "near_high_pct": 9.8,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -0.9,
+      "chg20": 2.1
+    },
+    {
+      "code": "2105",
+      "name": "正新",
+      "sector": "橡膠工業",
+      "total_lots": 3398,
+      "trust_lots": -436,
+      "foreign_lots": 3083,
+      "price": 31.35,
+      "near_high_pct": 18.7,
+      "new52": false,
+      "new20": false,
+      "above_ma60": true,
+      "chg5": -1.6,
+      "chg20": 2.6
+    },
+    {
+      "code": "3045",
+      "name": "台灣大",
+      "sector": "通信網路業",
+      "total_lots": 3379,
+      "trust_lots": 1400,
+      "foreign_lots": 1553
+    },
+    {
+      "code": "1102",
+      "name": "亞泥",
+      "sector": "水泥工業",
+      "total_lots": 3015,
+      "trust_lots": -59,
+      "foreign_lots": 2244
+    },
+    {
+      "code": "4938",
+      "name": "和碩",
+      "sector": "電腦及週邊設備業",
+      "total_lots": 2944,
+      "trust_lots": -418,
+      "foreign_lots": 2895
+    },
+    {
+      "code": "4526",
+      "name": "東台",
+      "sector": "電機機械",
+      "total_lots": 2804,
+      "trust_lots": 0,
+      "foreign_lots": 2909
+    },
+    {
+      "code": "5876",
+      "name": "上海商銀",
+      "sector": "金融保險",
+      "total_lots": 2702,
+      "trust_lots": 170,
+      "foreign_lots": 1516
+    },
+    {
+      "code": "6919",
+      "name": "康霈*",
+      "sector": "化學生技醫療",
+      "total_lots": 2276,
+      "trust_lots": 0,
+      "foreign_lots": 2282
+    },
+    {
+      "code": "2412",
+      "name": "中華電",
+      "sector": "通信網路業",
+      "total_lots": 2228,
+      "trust_lots": 2069,
+      "foreign_lots": -322
+    },
+    {
+      "code": "3376",
+      "name": "新日興",
+      "sector": "電子工業",
+      "total_lots": 2142,
+      "trust_lots": -300,
+      "foreign_lots": 2477
+    },
+    {
+      "code": "6209",
+      "name": "今國光",
+      "sector": "光電業",
+      "total_lots": 2105,
+      "trust_lots": 0,
+      "foreign_lots": 2618
+    },
+    {
+      "code": "2851",
+      "name": "中再保",
+      "sector": "金融保險",
+      "total_lots": 2066,
+      "trust_lots": 0,
+      "foreign_lots": 2043
+    },
+    {
+      "code": "3714",
+      "name": "富采",
+      "sector": "光電業",
+      "total_lots": 1891,
       "trust_lots": 1,
-      "foreign_lots": 1142
+      "foreign_lots": 1970
+    },
+    {
+      "code": "2609",
+      "name": "陽明",
+      "sector": "航運業",
+      "total_lots": 1860,
+      "trust_lots": 2,
+      "foreign_lots": 2610
+    },
+    {
+      "code": "6505",
+      "name": "台塑化",
+      "sector": "油電燃氣業",
+      "total_lots": 1851,
+      "trust_lots": -908,
+      "foreign_lots": 3236
+    },
+    {
+      "code": "4566",
+      "name": "時碩工業",
+      "sector": "電機機械",
+      "total_lots": 1797,
+      "trust_lots": 0,
+      "foreign_lots": 1803
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "sector": "金融保險",
+      "total_lots": 1794,
+      "trust_lots": 937,
+      "foreign_lots": -620
+    },
+    {
+      "code": "3026",
+      "name": "禾伸堂",
+      "sector": "電子工業",
+      "total_lots": 1719,
+      "trust_lots": -128,
+      "foreign_lots": 1881
+    },
+    {
+      "code": "8039",
+      "name": "台虹",
+      "sector": "電子零組件業",
+      "total_lots": 1699,
+      "trust_lots": 1,
+      "foreign_lots": 1861
+    },
+    {
+      "code": "2426",
+      "name": "鼎元",
+      "sector": "光電業",
+      "total_lots": 1695,
+      "trust_lots": 0,
+      "foreign_lots": 1897
+    },
+    {
+      "code": "1714",
+      "name": "和桐",
+      "sector": "化學工業",
+      "total_lots": 1633,
+      "trust_lots": 0,
+      "foreign_lots": 1879
+    },
+    {
+      "code": "2030",
+      "name": "彰源",
+      "sector": "鋼鐵工業",
+      "total_lots": 1631,
+      "trust_lots": 0,
+      "foreign_lots": 1626
+    },
+    {
+      "code": "2352",
+      "name": "佳世達",
+      "sector": "電腦及週邊設備業",
+      "total_lots": 1600,
+      "trust_lots": 28,
+      "foreign_lots": 1925
+    },
+    {
+      "code": "2542",
+      "name": "興富發",
+      "sector": "建材營造",
+      "total_lots": 1598,
+      "trust_lots": -127,
+      "foreign_lots": 1807
+    },
+    {
+      "code": "2484",
+      "name": "希華",
+      "sector": "電子工業",
+      "total_lots": 1536,
+      "trust_lots": 0,
+      "foreign_lots": 1662
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "sector": "通信網路業",
+      "total_lots": 1535,
+      "trust_lots": 1537,
+      "foreign_lots": -929
+    },
+    {
+      "code": "2377",
+      "name": "微星",
+      "sector": "電子工業",
+      "total_lots": 1512,
+      "trust_lots": -87,
+      "foreign_lots": 1640
     }
   ]
 }
